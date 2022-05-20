@@ -14,4 +14,9 @@ describe('head', () => {
   it('should give the content upto 10 lines', () => {
     assert.strictEqual(head('how\nare\nyou\n?'), 'how\nare\nyou\n?');
   });
+  it('should give only first 10 lines for content more than 10 lines',
+    () => {
+      assert.strictEqual(head('a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl'),
+        'a\nb\nc\nd\ne\nf\ng\nh\ni\nj');
+    });
 });
