@@ -27,9 +27,9 @@ describe('head', () => {
       'aa');
   });
   it('should give lines upto specified bytes', () => {
-    assert.strictEqual(head('aaa\nb\nhello', { byte: 2 }),
+    assert.strictEqual(head('aaa\nb\nhello', { bytes: 2 }),
       'aa');
-    assert.strictEqual(head('aa\nb\nhello', { byte: 6 }),
+    assert.strictEqual(head('aa\nb\nhello', { bytes: 6 }),
       'aa\nb\nh');
   });
 });

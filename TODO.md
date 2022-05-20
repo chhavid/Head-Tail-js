@@ -1,10 +1,6 @@
 **TODO:**
 
 - [ ] Refactor parseArgs.
-- [ ] Provide default of 10 for count option.
-- [ ] Accept options from user.
-- [ ] Add a function to parse command line arguments.
-- [ ] Add a sample file for using head.
 - [ ] Add try catch block while reading file.
 - [ ] Give usage if no parameters are given.
 
@@ -16,6 +12,10 @@
 
 **DONE:**
 
+- [x] Provide default of 10 for count option.
+- [x] Accept options from user.
+- [x] Add a function to parse command line arguments.
+- [x] Add a sample file for using head.
 - [x] Take readFileSyc as parameter.
 - [x] Test headMain.
 - [x] Make headMain.
