@@ -3,11 +3,12 @@
 - [ ] Make '\n' a constant.
 - [ ] Change the name of `src/head.js`.
 - [ ] Make head work for data only.
-- [ ] Parameterize the number of lines. 
 - [ ] Add option for count (-n) of lines.
 
 **DONE:**
 
+- [x] Tests for firstLines.
+- [x] Parameterize the number of lines in firstLines. 
 - [x] Extract splitting and joining of content.
 - [x] Extract the logic of giving starting lines.
 - [x] Should only give upto 10 lines.

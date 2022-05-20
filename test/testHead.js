@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { head } = require('../src/head.js');
+const { head, firstLines } = require('../src/head.js');
 
 describe('head', () => {
   it('should give the content of single line', () => {
@@ -19,4 +19,18 @@ describe('head', () => {
       assert.strictEqual(head('a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl'),
         'a\nb\nc\nd\ne\nf\ng\nh\ni\nj');
     });
+});
+
+describe('firstLines', () => {
+  it('Should give one line', () => {
+    return assert.deepStrictEqual(firstLines(['hello'], 1), ['hello']);
+  });
+  it('Should give two lines', () => {
+    return assert.deepStrictEqual(firstLines(['hello', 'bye'], 2),
+      ['hello', 'bye']);
+  });
+  it('Should give only one line', () => {
+    return assert.deepStrictEqual(firstLines(['good', 'bye'], 1),
+      ['good']);
+  });
 });
