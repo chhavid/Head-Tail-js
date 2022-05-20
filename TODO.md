@@ -1,12 +1,18 @@
 **TODO:**
 
-- [ ] Make '\n' a constant.
+- [ ] Make `'\n'` a constant.
 - [ ] Change the name of `src/head.js`.
 - [ ] Make head work for data only.
-- [ ] Add option for count (-n) of lines.
+
+**Consider:**
+
+- [ ] Object for options of `-c` and `-n`.
+- [ ] Changing function name `firstLines`.
 
 **DONE:**
 
+- [x] Add option for `count` of lines.
+- [x] Add parameter to specify count of lines in head.
 - [x] Tests for firstLines.
 - [x] Parameterize the number of lines in firstLines. 
 - [x] Extract splitting and joining of content.

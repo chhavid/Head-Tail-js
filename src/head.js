@@ -5,9 +5,9 @@ const joinLines = (lines) => lines.join('\n');
 const firstLines = (content, count) =>
   content.slice(0, count);
 
-const head = function (content) {
+const head = function (content, count) {
   const lines = splitContent(content);
-  const headLines = firstLines(lines, 10);
+  const headLines = firstLines(lines, count);
   return joinLines(headLines);
 };
 
