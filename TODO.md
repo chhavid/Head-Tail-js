@@ -1,8 +1,11 @@
 **TODO:**
 
+- [ ] Make `0` a constant.
 - [ ] Make `'\n'` a constant.
 - [ ] Make head work for data only.
-- [ ] Extract function to count the bytes.
+- [ ] Provide default of 10 for count option.
+- [ ] Accept file from user.
+- [ ] Test giveBytes and giveLines.
 
 **Consider:**
 
@@ -10,6 +13,8 @@
 
 **DONE:**
 
+- [x] Extract function to count and give lines.
+- [x] Extract function to count the bytes.
 - [x] Does -c counts the newline character also? (yes)
 - [x] Add `bytes` (-c) option.
 - [x] Object for options of `-c` and `-n`.

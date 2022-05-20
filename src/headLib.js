@@ -7,13 +7,18 @@ const firstLines = (content, count) => {
   return content.slice(start, count);
 };
 
-const head = function (content, { count, byte }) {
-  if (byte) {
-    return content.slice(0, byte);
-  }
+const giveLines = function (content, count) {
   const lines = splitContent(content);
   const headLines = firstLines(lines, count);
   return joinLines(headLines);
+};
+
+const giveBytes = function (content, bytes) {
+  return content.slice(0, bytes);
+};
+
+const head = function (content, { count, byte }) {
+  return byte ? giveBytes(content, byte) : giveLines(content, count);
 };
 
 exports.head = head;
