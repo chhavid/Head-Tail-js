@@ -1,10 +1,9 @@
 **TODO:**
 
-- [ ] Take readFileSyc as parameter.
-- [ ] Test headMain.
 - [ ] Provide default of 10 for count option.
 - [ ] Accept options from user.
 - [ ] Add a sample file for using head.
+- [ ] Add try catch block while reading file.
 
 **Consider:**
 
@@ -14,6 +13,8 @@
 
 **DONE:**
 
+- [x] Take readFileSyc as parameter.
+- [x] Test headMain.
 - [x] Make headMain.
 - [x] Accept file from user.
 - [x] Make head work for data only.

@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 const NEWLINE = '\n';
 const startIndex = 0;
 
@@ -25,8 +23,8 @@ const head = function (content, { count, byte }) {
   return byte ? giveBytes(content, byte) : giveLines(content, count);
 };
 
-const headMain = function (file) {
-  const content = fs.readFileSync(file, 'utf8');
+const headMain = function (readFile, fileName) {
+  const content = readFile(fileName, 'utf8');
   return head(content, { count: 10 });
 };
 
