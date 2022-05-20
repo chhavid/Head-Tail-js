@@ -1,17 +1,22 @@
 **TODO:**
 
-- [ ] Make head work for data only.
+- [ ] Take readFileSyc as parameter.
+- [ ] Test headMain.
 - [ ] Provide default of 10 for count option.
-- [ ] Accept file from user.
-- [ ] Make headMain.
+- [ ] Accept options from user.
+- [ ] Add a sample file for using head.
 
 **Consider:**
 
 - [ ] Changing function name `firstLines`.
 - [ ] Extract tests in another file.
+- [ ] Extract functions in another file.
 
 **DONE:**
 
+- [x] Make headMain.
+- [x] Accept file from user.
+- [x] Make head work for data only.
 - [x] Make `'\n'` a constant.
 - [x] Make `0` a constant.
 - [x] Test giveBytes and giveLines.
