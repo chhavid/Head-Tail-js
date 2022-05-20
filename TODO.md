@@ -1,9 +1,12 @@
 **TODO:**
 
+- [ ] Refactor parseArgs.
 - [ ] Provide default of 10 for count option.
 - [ ] Accept options from user.
+- [ ] Add a function to parse command line arguments.
 - [ ] Add a sample file for using head.
 - [ ] Add try catch block while reading file.
+- [ ] Give usage if no parameters are given.
 
 **Consider:**
 
