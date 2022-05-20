@@ -1,8 +1,8 @@
 **TODO:**
 
 - [ ] Refactor parseArgs.
-- [ ] Add try catch block while reading file.
 - [ ] Give usage if no parameters are given.
+- [ ] Accept more than one file.
 
 **Consider:**
 
@@ -12,6 +12,8 @@
 
 **DONE:**
 
+- [x] Give error if unable to read file.
+- [x] Add try catch block while reading file.
 - [x] Provide default of 10 for count option.
 - [x] Accept options from user.
 - [x] Add a function to parse command line arguments.
