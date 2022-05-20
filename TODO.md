@@ -1,16 +1,20 @@
 **TODO:**
 
 - [ ] Make `'\n'` a constant.
-- [ ] Change the name of `src/head.js`.
 - [ ] Make head work for data only.
+- [ ] Extract function to count the bytes.
 
 **Consider:**
 
-- [ ] Object for options of `-c` and `-n`.
 - [ ] Changing function name `firstLines`.
 
 **DONE:**
 
+- [x] Does -c counts the newline character also? (yes)
+- [x] Add `bytes` (-c) option.
+- [x] Object for options of `-c` and `-n`.
+- [x] Pass count in object.
+- [x] Change the name of `src/head.js`.
 - [x] Add option for `count` of lines.
 - [x] Add parameter to specify count of lines in head.
 - [x] Tests for firstLines.
