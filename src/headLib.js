@@ -1,10 +1,12 @@
-const splitContent = (content) => content.split('\n');
+const NEWLINE = '\n';
+const startIndex = 0;
 
-const joinLines = (lines) => lines.join('\n');
+const splitContent = (content) => content.split(NEWLINE);
+
+const joinLines = (lines) => lines.join(NEWLINE);
 
 const firstLines = (content, count) => {
-  const start = 0;
-  return content.slice(start, count);
+  return content.slice(startIndex, count);
 };
 
 const giveLines = function (content, count) {
@@ -23,3 +25,5 @@ const head = function (content, { count, byte }) {
 
 exports.head = head;
 exports.firstLines = firstLines;
+exports.giveLines = giveLines;
+exports.giveBytes = giveBytes;

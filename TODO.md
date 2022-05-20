@@ -1,18 +1,20 @@
 **TODO:**
 
-- [ ] Make `0` a constant.
-- [ ] Make `'\n'` a constant.
 - [ ] Make head work for data only.
 - [ ] Provide default of 10 for count option.
 - [ ] Accept file from user.
-- [ ] Test giveBytes and giveLines.
+- [ ] Make headMain.
 
 **Consider:**
 
 - [ ] Changing function name `firstLines`.
+- [ ] Extract tests in another file.
 
 **DONE:**
 
+- [x] Make `'\n'` a constant.
+- [x] Make `0` a constant.
+- [x] Test giveBytes and giveLines.
 - [x] Extract function to count and give lines.
 - [x] Extract function to count the bytes.
 - [x] Does -c counts the newline character also? (yes)

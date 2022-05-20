@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { head, firstLines } = require('../src/headLib.js');
+const { head, firstLines, giveBytes, giveLines } = require('../src/headLib.js');
 
 describe('head', () => {
   it('should give the content of single line', () => {
@@ -45,5 +45,23 @@ describe('firstLines', () => {
   it('Should give only one line', () => {
     return assert.deepStrictEqual(firstLines(['good', 'bye'], 1),
       ['good']);
+  });
+});
+
+describe('giveLines', () => {
+  it('should give single line.', () => {
+    return assert.strictEqual(giveLines('a', 1), 'a');
+  });
+  it('should give 2 lines.', () => {
+    return assert.strictEqual(giveLines('a\nb\nc', 2), 'a\nb');
+  });
+});
+
+describe('giveBytes', () => {
+  it('should give single byte.', () => {
+    return assert.strictEqual(giveBytes('a', 1), 'a');
+  });
+  it('should give 5 bytes.', () => {
+    return assert.strictEqual(giveBytes('abc\nde', 5), 'abc\nd');
   });
 });
