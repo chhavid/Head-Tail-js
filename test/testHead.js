@@ -11,4 +11,7 @@ describe('head', () => {
     assert.strictEqual(head('hello\nworld'), 'hello\nworld');
     assert.strictEqual(head('good\nbye'), 'good\nbye');
   });
+  it('should give the content upto 10 lines', () => {
+    assert.strictEqual(head('how\nare\nyou\n?'), 'how\nare\nyou\n?');
+  });
 });
