@@ -7,11 +7,11 @@
 **Consider:**
 
 - [ ] Changing function name `firstLines`.
-- [ ] Extract tests in another file.
-- [ ] Extract functions in another file.
 
 **DONE:**
 
+- [x] Extract tests in another file.
+- [x] Extract functions in another file.
 - [x] Give error if unable to read file.
 - [x] Add try catch block while reading file.
 - [x] Provide default of 10 for count option.

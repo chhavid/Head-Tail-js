@@ -1,67 +1,34 @@
 const assert = require('assert');
-const { head, firstLines, giveBytes, giveLines } = require('../src/headLib.js');
-
-describe('head', () => {
-  it('should give the content of single line', () => {
-    assert.strictEqual(head('hello', { count: 1 }), 'hello');
-    assert.strictEqual(head('bye', { count: 1 }), 'bye');
-  });
-
-  it('should give the content with 2 lines', () => {
-    assert.strictEqual(head('hello\nworld', { count: 2 }), 'hello\nworld');
-    assert.strictEqual(head('good\nbye', { count: 2 }), 'good\nbye');
-  });
-  it('should give the content upto 10 lines', () => {
-    assert.strictEqual(head('how\nare\nyou\n?', { count: 4 }),
-      'how\nare\nyou\n?');
-  });
-  it('should give only first 10 lines for content more than 10 lines',
-    () => {
-      assert.strictEqual(head('a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl',
-        { count: 10 }), 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj');
-    });
-  it('should give lines upto specified number', () => {
-    assert.strictEqual(head('aa\nb\nhello', { count: 2 }),
-      'aa\nb');
-    assert.strictEqual(head('aa\nb\nhello', { count: 1 }),
-      'aa');
-  });
-  it('should give lines upto specified bytes', () => {
-    assert.strictEqual(head('aaa\nb\nhello', { bytes: 2 }),
-      'aa');
-    assert.strictEqual(head('aa\nb\nhello', { bytes: 6 }),
-      'aa\nb\nh');
-  });
-});
+const { firstLines, getBytes, getLines } = require('../src/headLib.js');
 
 describe('firstLines', () => {
-  it('Should give one line', () => {
+  it('Should get one line', () => {
     return assert.deepStrictEqual(firstLines(['hello'], 1), ['hello']);
   });
-  it('Should give two lines', () => {
+  it('Should get two lines', () => {
     return assert.deepStrictEqual(firstLines(['hello', 'bye'], 2),
       ['hello', 'bye']);
   });
-  it('Should give only one line', () => {
+  it('Should get only one line', () => {
     return assert.deepStrictEqual(firstLines(['good', 'bye'], 1),
       ['good']);
   });
 });
 
-describe('giveLines', () => {
-  it('should give single line.', () => {
-    return assert.strictEqual(giveLines('a', 1), 'a');
+describe('getLines', () => {
+  it('should get single line.', () => {
+    return assert.strictEqual(getLines('a', 1), 'a');
   });
-  it('should give 2 lines.', () => {
-    return assert.strictEqual(giveLines('a\nb\nc', 2), 'a\nb');
+  it('should get 2 lines.', () => {
+    return assert.strictEqual(getLines('a\nb\nc', 2), 'a\nb');
   });
 });
 
-describe('giveBytes', () => {
-  it('should give single byte.', () => {
-    return assert.strictEqual(giveBytes('a', 1), 'a');
+describe('getBytes', () => {
+  it('should get single byte.', () => {
+    return assert.strictEqual(getBytes('a', 1), 'a');
   });
-  it('should give 5 bytes.', () => {
-    return assert.strictEqual(giveBytes('abc\nde', 5), 'abc\nd');
+  it('should get 5 bytes.', () => {
+    return assert.strictEqual(getBytes('abc\nde', 5), 'abc\nd');
   });
 });
