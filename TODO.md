@@ -1,7 +1,6 @@
 **TODO:**
 
 - [ ] Refactor parseArgs.
-- [ ] Format output with spaces ,symbol and fileName.
 - [ ] Should give error if both options are given together.
 - [ ] Should also except -num as -n num.
 - [ ] Should give error if there is options but no file.
@@ -12,6 +11,8 @@
 
 **DONE:**
 
+- [x] Format output with spaces ,symbol and fileName.
+- [x] Should override the option if same option is given again.
 - [x] Parser should give more information about the options.
 - [x] Modify contract of parseArgs.
 - [x] Give usage if no parameters are given.

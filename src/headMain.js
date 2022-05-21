@@ -6,7 +6,12 @@ const head = function (content, { name, limit }) {
     ? sliceUpto(content, limit) : getLines(content, limit);
 };
 
-const headFile = function (readFile, file, options) {
+const formatContent = function (content, file, numOfFiles) {
+  const heading = '==>' + file + '<==' + '\n';
+  return numOfFiles > 1 ? heading + content + '\n\n' : content;
+};
+
+const headFile = function (readFile, file, options, numOfFiles) {
   let content;
   try {
     content = readFile(file, 'utf8');
@@ -17,12 +22,14 @@ const headFile = function (readFile, file, options) {
       file,
     };
   }
-  return head(content, options);
+  const fileContent = head(content, options);
+  return formatContent(fileContent, file, numOfFiles);
 };
 
 const headMain = function (readFile, ...args) {
   const { files, options } = parseArgs(args);
-  return files.map((file) => headFile(readFile, file, options));
+  const numOfFiles = files.length;
+  return files.map((file) => headFile(readFile, file, options, numOfFiles));
 };
 
 exports.head = head;
