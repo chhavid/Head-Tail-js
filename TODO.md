@@ -1,9 +1,9 @@
 **TODO:**
 
-- [ ] Modify contract of parseArgs.
 - [ ] Refactor parseArgs.
 - [ ] Format output with spaces ,symbol and fileName.
-- [ ] Parser should give more information about the options.
+- [ ] Should give error if both options are given together.
+- [ ] Should also except -num as -n num.
 
 **Consider:**
 
@@ -11,6 +11,8 @@
 
 **DONE:**
 
+- [x] Parser should give more information about the options.
+- [x] Modify contract of parseArgs.
 - [x] Give usage if no parameters are given.
 - [x] Case of -c with 0.
 ~~- [x] Using delimiters in options.~~

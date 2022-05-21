@@ -1,23 +1,19 @@
-const defaultOptions = function (args) {
-  const fileName = args;
-  const options = { count: 10 };
-  return { fileName, options };
-};
-
-const parseOptions = function (args) {
+const parseArgs = function (args) {
+  const fileName = [];
   const keys = { '-n': 'count', '-c': 'bytes' };
-  const options = {};
-  const key = keys[args[0]];
-  options[key] = +args[1];
-  const fileName = args.slice(2);
-  return { fileName, options };
-};
+  const options = { name: 'count', limit: 10 };
 
-const parseArgs = args => {
-  const hasOptions = /^-.$/.test(...args);
-  return hasOptions ? parseOptions(args) : defaultOptions(args);
+  for (let index = 0; index < args.length; index += 2) {
+    if (/^-.$/.test(args[index])) {
+      options.name = keys[args[index]];
+
+      options.limit = + args[index + 1];
+    } else {
+      fileName.push(...args.slice(index));
+      return { fileName, options };
+    }
+  }
+  return { fileName, options };
 };
 
 exports.parseArgs = parseArgs;
-exports.defaultOptions = defaultOptions;
-exports.parseOptions = parseOptions;
