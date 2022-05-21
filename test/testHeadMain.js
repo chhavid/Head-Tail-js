@@ -38,8 +38,8 @@ describe('head', () => {
 
 const readFile = (mockFile, expEncoding, content) => {
   let index = 0;
-  return function (fileName, encoding) {
-    assert.equal(mockFile[index], fileName);
+  return function (files, encoding) {
+    assert.equal(mockFile[index], files);
     assert.equal(encoding, expEncoding);
     const fileContent = content[index];
     index++;

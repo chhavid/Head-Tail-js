@@ -17,12 +17,12 @@ const headFile = function (readFile, file, options) {
       file,
     };
   }
-  return `${head(content, options)}`;
+  return head(content, options);
 };
 
 const headMain = function (readFile, ...args) {
-  const { fileName, options } = parseArgs(args);
-  return fileName.map((file) => headFile(readFile, file, options));
+  const { files, options } = parseArgs(args);
+  return files.map((file) => headFile(readFile, file, options));
 };
 
 exports.head = head;

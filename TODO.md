@@ -4,6 +4,7 @@
 - [ ] Format output with spaces ,symbol and fileName.
 - [ ] Should give error if both options are given together.
 - [ ] Should also except -num as -n num.
+- [ ] Should give error if there is options but no file.
 
 **Consider:**
 
