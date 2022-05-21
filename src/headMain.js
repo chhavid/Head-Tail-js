@@ -5,20 +5,25 @@ const head = function (content, { count, bytes }) {
   return bytes ? sliceUpto(content, bytes) : getLines(content, count);
 };
 
-const headMain = function (readFile, ...args) {
-  const { fileName, options } = parseArgs(args);
+const headFile = function (readFile, file, options) {
   let content;
   try {
-    content = readFile(fileName[0], 'utf8');
+    content = readFile(file, 'utf8');
   } catch (error) {
     throw {
       name: 'FileReadError',
-      message: `Unable to read ${fileName}`,
-      fileName,
+      message: `Unable to read ${file}`,
+      file,
     };
   }
   return head(content, options);
 };
 
+const headMain = function (readFile, ...args) {
+  const { fileName, options } = parseArgs(args);
+  return fileName.map((file) => headFile(readFile, file, options));
+};
+
 exports.head = head;
 exports.headMain = headMain;
+exports.headFile = headFile;

@@ -2,7 +2,7 @@
 
 - [ ] Refactor parseArgs.
 - [ ] Give usage if no parameters are given.
-- [ ] Give head of more than one file. 
+- [ ] Add spaces while showing output of multiple files.
 
 **Consider:**
 
@@ -10,6 +10,7 @@
 
 **DONE:**
 
+- [x] Give head of more than one file. 
 - [x] Accept and parse more than one file.
 - [x] Changing function name `firstLines`.
 - [x] Combine getLines and getBytes function.

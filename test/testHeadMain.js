@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { head, headMain } = require('../src/headMain.js');
+const { head, headMain, headFile } = require('../src/headMain.js');
 
 describe('head', () => {
   it('should give the content of single line', () => {
@@ -42,9 +42,28 @@ const readFile = (mockFile, expEncoding, content) => {
   };
 };
 
-describe('headMain', () => {
-  it('should give single line of file', () => {
+describe('headFile', () => {
+  it('should give line of single file', () => {
     const mockReadFileSync = readFile('content.txt', 'utf8', 'hello');
-    assert.strictEqual(headMain(mockReadFileSync, 'content.txt'), 'hello');
+    assert.deepStrictEqual(headFile(
+      mockReadFileSync, 'content.txt', { count: 1 }), 'hello');
+  });
+  it('should give multiple lines of single file', () => {
+    const mockReadFileSync = readFile('content.txt', 'utf8', 'hello\nbye');
+    assert.deepStrictEqual(headFile(
+      mockReadFileSync, 'content.txt', { count: 2 }), 'hello\nbye');
+  });
+});
+
+describe('headMain', () => {
+  it('should give line of single file', () => {
+    const mockReadFileSync = readFile('content.txt', 'utf8', 'hello');
+    assert.deepStrictEqual(headMain(mockReadFileSync, 'content.txt'),
+      ['hello']);
+  });
+  it('should give line of multiple file', () => {
+    const mockReadFileSync = readFile('content.txt', 'utf8', 'hello');
+    assert.deepStrictEqual(headMain(mockReadFileSync, 'content.txt',
+      'content.txt'), ['hello', 'hello']);
   });
 });

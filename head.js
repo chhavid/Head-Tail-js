@@ -4,7 +4,9 @@ const { headMain } = require('./src/headMain.js');
 
 const main = () => {
   try {
-    console.log(headMain(fs.readFileSync, ...process.argv.slice(2)));
+    const content = headMain(fs.readFileSync, ...process.argv.slice(2));
+    console.log(...content);
+    // console.log(headMain(fs.readFileSync, ...process.argv.slice(2)));
   } catch (error) {
     console.log(error.message);
   }
