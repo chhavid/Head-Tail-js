@@ -35,21 +35,24 @@ describe('head', () => {
 });
 
 const readFile = (mockFile, expEncoding, content) => {
+  let index = 0;
   return function (fileName, encoding) {
-    assert.equal(mockFile, fileName);
+    assert.equal(mockFile[index], fileName);
     assert.equal(encoding, expEncoding);
-    return content;
+    const fileContent = content[index];
+    index++;
+    return fileContent;
   };
 };
 
 describe('headFile', () => {
   it('should give line of single file', () => {
-    const mockReadFileSync = readFile('content.txt', 'utf8', 'hello');
+    const mockReadFileSync = readFile(['content.txt'], 'utf8', ['hello']);
     assert.deepStrictEqual(headFile(
       mockReadFileSync, 'content.txt', { count: 1 }), '\nhello');
   });
   it('should give multiple lines of single file', () => {
-    const mockReadFileSync = readFile('content.txt', 'utf8', 'hello\nbye');
+    const mockReadFileSync = readFile(['content.txt'], 'utf8', ['hello\nbye']);
     assert.deepStrictEqual(headFile(
       mockReadFileSync, 'content.txt', { count: 2 }), '\nhello\nbye');
   });
@@ -57,13 +60,20 @@ describe('headFile', () => {
 
 describe('headMain', () => {
   it('should give line of single file', () => {
-    const mockReadFileSync = readFile('content.txt', 'utf8', 'hello');
+    const mockReadFileSync = readFile(['content.txt'], 'utf8', ['hello']);
     assert.deepStrictEqual(headMain(mockReadFileSync, 'content.txt'),
       ['\nhello']);
   });
-  it('should give line of multiple file', () => {
-    const mockReadFileSync = readFile('content.txt', 'utf8', 'hello');
+  it('should give line of two files', () => {
+    const mockReadFileSync = readFile(['content.txt', 'a.txt'], 'utf8',
+      ['hello', 'bye']);
     assert.deepStrictEqual(headMain(mockReadFileSync, 'content.txt',
-      'content.txt'), ['\nhello', '\nhello']);
+      'a.txt'), ['\nhello', '\nbye']);
+  });
+  it('should give line of multiple files', () => {
+    const mockReadFileSync = readFile(['content.txt', 'a.txt', 'b.txt'], 'utf8',
+      ['hello', 'bye', 'hey']);
+    assert.deepStrictEqual(headMain(mockReadFileSync, 'content.txt',
+      'a.txt', 'b.txt'), ['\nhello', '\nbye', '\nhey']);
   });
 });

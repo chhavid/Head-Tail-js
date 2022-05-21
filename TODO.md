@@ -2,6 +2,7 @@
 
 - [ ] Refactor parseArgs.
 - [ ] Give usage if no parameters are given.
+- [ ] Parser should give more information about the options.
 
 **Consider:**
 
@@ -10,6 +11,7 @@
 
 **DONE:**
 
+- [x] Testing of main with multiple files.
 - [x] Add spaces while showing output of multiple files.
 - [x] Separated parse function with option and default.
 - [x] Give head of more than one file. 
