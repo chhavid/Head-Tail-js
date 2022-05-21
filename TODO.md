@@ -2,7 +2,7 @@
 
 - [ ] Refactor parseArgs.
 - [ ] Give usage if no parameters are given.
-- [ ] Accept more than one file.
+- [ ] Give head of more than one file. 
 
 **Consider:**
 
@@ -10,6 +10,7 @@
 
 **DONE:**
 
+- [x] Accept and parse more than one file.
 - [x] Changing function name `firstLines`.
 - [x] Combine getLines and getBytes function.
 - [x] Extract tests in another file.

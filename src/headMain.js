@@ -9,7 +9,7 @@ const headMain = function (readFile, ...args) {
   const { fileName, options } = parseArgs(args);
   let content;
   try {
-    content = readFile(fileName, 'utf8');
+    content = readFile(fileName[0], 'utf8');
   } catch (error) {
     throw {
       name: 'FileReadError',
