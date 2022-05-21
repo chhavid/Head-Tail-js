@@ -1,16 +1,17 @@
 **TODO:**
 
 - [ ] Refactor parseArgs.
+- [ ] Format output with spaces ,symbol and fileName.
 - [ ] Give usage if no parameters are given.
 - [ ] Parser should give more information about the options.
 
 **Consider:**
 
-- [ ] Using delimiters in options.
-- [ ] Format output with spaces and fileName.
 
 **DONE:**
 
+- [x] Case of -c with 0.
+~~- [x] Using delimiters in options.~~
 - [x] Testing of main with multiple files.
 - [x] Add spaces while showing output of multiple files.
 - [x] Separated parse function with option and default.
