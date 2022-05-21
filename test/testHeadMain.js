@@ -70,12 +70,13 @@ describe('headMain', () => {
     const mockReadFileSync = readFile(['content.txt', 'a.txt'], 'utf8',
       ['hello', 'bye']);
     assert.deepStrictEqual(headMain(mockReadFileSync, 'content.txt',
-      'a.txt'), ['hello', 'bye']);
+      'a.txt'), ['==>content.txt<==\nhello\n\n', '==>a.txt<==\nbye\n\n']);
   });
   it('should give line of multiple files', () => {
     const mockReadFileSync = readFile(['content.txt', 'a.txt', 'b.txt'], 'utf8',
       ['hello', 'bye', 'hey']);
     assert.deepStrictEqual(headMain(mockReadFileSync, 'content.txt',
-      'a.txt', 'b.txt'), ['hello', 'bye', 'hey']);
+      'a.txt', 'b.txt'), ['==>content.txt<==\nhello\n\n',
+      '==>a.txt<==\nbye\n\n', '==>b.txt<==\nhey\n\n']);
   });
 });
