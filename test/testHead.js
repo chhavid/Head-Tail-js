@@ -1,19 +1,5 @@
 const assert = require('assert');
-const { firstLines, getBytes, getLines } = require('../src/headLib.js');
-
-describe('firstLines', () => {
-  it('Should get one line', () => {
-    return assert.deepStrictEqual(firstLines(['hello'], 1), ['hello']);
-  });
-  it('Should get two lines', () => {
-    return assert.deepStrictEqual(firstLines(['hello', 'bye'], 2),
-      ['hello', 'bye']);
-  });
-  it('Should get only one line', () => {
-    return assert.deepStrictEqual(firstLines(['good', 'bye'], 1),
-      ['good']);
-  });
-});
+const { getLines, sliceUpto } = require('../src/headLib.js');
 
 describe('getLines', () => {
   it('should get single line.', () => {
@@ -24,11 +10,18 @@ describe('getLines', () => {
   });
 });
 
-describe('getBytes', () => {
+describe('sliceUpto', () => {
   it('should get single byte.', () => {
-    return assert.strictEqual(getBytes('a', 1), 'a');
+    return assert.strictEqual(sliceUpto('a', 1), 'a');
   });
   it('should get 5 bytes.', () => {
-    return assert.strictEqual(getBytes('abc\nde', 5), 'abc\nd');
+    return assert.strictEqual(sliceUpto('abc\nde', 5), 'abc\nd');
+  });
+  it('Should get only one line of array', () => {
+    return assert.deepStrictEqual(sliceUpto(['hello', 'bye'], 1), ['hello']);
+  });
+  it('Should get two lines', () => {
+    return assert.deepStrictEqual(sliceUpto(['hello', 'bye'], 2),
+      ['hello', 'bye']);
   });
 });

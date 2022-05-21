@@ -6,10 +6,12 @@
 
 **Consider:**
 
-- [ ] Changing function name `firstLines`.
+- [ ] Using delimiters in options
 
 **DONE:**
 
+- [x] Changing function name `firstLines`.
+- [x] Combine getLines and getBytes function.
 - [x] Extract tests in another file.
 - [x] Extract functions in another file.
 - [x] Give error if unable to read file.

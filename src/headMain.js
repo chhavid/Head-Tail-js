@@ -1,8 +1,8 @@
 const { parseArgs } = require('./parse.js');
-const { getBytes, getLines } = require('./headLib.js');
+const { getLines, sliceUpto } = require('./headLib.js');
 
 const head = function (content, { count, bytes }) {
-  return bytes ? getBytes(content, bytes) : getLines(content, count);
+  return bytes ? sliceUpto(content, bytes) : getLines(content, count);
 };
 
 const headMain = function (readFile, ...args) {

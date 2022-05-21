@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const { headMain } = require('./src/headLib.js');
+const { headMain } = require('./src/headMain.js');
 
 const main = () => {
   try {
