@@ -1,5 +1,6 @@
 const assert = require('assert');
-const { parseArgs } = require('../src/parse.js');
+const { parseArgs, parseOptions, defaultOptions } =
+  require('../src/parse.js');
 
 describe('parseArgs', () => {
   it('should parse only filename.', () => {
@@ -40,3 +41,34 @@ describe('parseArgs', () => {
     });
   });
 });
+
+describe('parseOptions', () => {
+  it('should parse with bytes option .', () => {
+    return assert.deepStrictEqual(parseOptions(['-c', '1', 'a.txt']),
+      {
+        fileName: ['a.txt'], options: { bytes: 1 }
+      });
+  });
+  it('should parse with count option .', () => {
+    return assert.deepStrictEqual(parseOptions(['-n', '1', 'a.txt']),
+      {
+        fileName: ['a.txt'], options: { count: 1 }
+      });
+  });
+});
+describe('parseWithDefaultOptions', () => {
+  it('should parse file without options.', () => {
+    return assert.deepStrictEqual(defaultOptions(['a.txt']),
+      {
+        fileName: ['a.txt'], options: { count: 10 }
+      });
+  });
+  it('should parse multiple files without options.', () => {
+    return assert.deepStrictEqual(defaultOptions(['a.txt', 'b.txt']),
+      {
+        fileName: ['a.txt', 'b.txt'], options: { count: 10 }
+      });
+  });
+
+});
+

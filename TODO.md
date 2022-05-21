@@ -10,6 +10,7 @@
 
 **DONE:**
 
+- [x] Separated parse function with option and default.
 - [x] Give head of more than one file. 
 - [x] Accept and parse more than one file.
 - [x] Changing function name `firstLines`.
