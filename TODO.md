@@ -1,15 +1,17 @@
 **TODO:**
 
+- [ ] Modify contract of parseArgs.
 - [ ] Refactor parseArgs.
 - [ ] Format output with spaces ,symbol and fileName.
-- [ ] Give usage if no parameters are given.
 - [ ] Parser should give more information about the options.
 
 **Consider:**
 
+- [ ] Giving array of objects for filename and content in mock function.
 
 **DONE:**
 
+- [x] Give usage if no parameters are given.
 - [x] Case of -c with 0.
 ~~- [x] Using delimiters in options.~~
 - [x] Testing of main with multiple files.
