@@ -2,14 +2,15 @@
 
 - [ ] Refactor parseArgs.
 - [ ] Give usage if no parameters are given.
-- [ ] Add spaces while showing output of multiple files.
 
 **Consider:**
 
-- [ ] Using delimiters in options
+- [ ] Using delimiters in options.
+- [ ] Format output with spaces and fileName.
 
 **DONE:**
 
+- [x] Add spaces while showing output of multiple files.
 - [x] Separated parse function with option and default.
 - [x] Give head of more than one file. 
 - [x] Accept and parse more than one file.

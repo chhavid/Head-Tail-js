@@ -6,7 +6,6 @@ const main = () => {
   try {
     const content = headMain(fs.readFileSync, ...process.argv.slice(2));
     console.log(...content);
-    // console.log(headMain(fs.readFileSync, ...process.argv.slice(2)));
   } catch (error) {
     console.log(error.message);
   }

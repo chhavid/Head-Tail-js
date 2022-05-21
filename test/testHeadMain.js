@@ -46,12 +46,12 @@ describe('headFile', () => {
   it('should give line of single file', () => {
     const mockReadFileSync = readFile('content.txt', 'utf8', 'hello');
     assert.deepStrictEqual(headFile(
-      mockReadFileSync, 'content.txt', { count: 1 }), 'hello');
+      mockReadFileSync, 'content.txt', { count: 1 }), '\nhello');
   });
   it('should give multiple lines of single file', () => {
     const mockReadFileSync = readFile('content.txt', 'utf8', 'hello\nbye');
     assert.deepStrictEqual(headFile(
-      mockReadFileSync, 'content.txt', { count: 2 }), 'hello\nbye');
+      mockReadFileSync, 'content.txt', { count: 2 }), '\nhello\nbye');
   });
 });
 
@@ -59,11 +59,11 @@ describe('headMain', () => {
   it('should give line of single file', () => {
     const mockReadFileSync = readFile('content.txt', 'utf8', 'hello');
     assert.deepStrictEqual(headMain(mockReadFileSync, 'content.txt'),
-      ['hello']);
+      ['\nhello']);
   });
   it('should give line of multiple file', () => {
     const mockReadFileSync = readFile('content.txt', 'utf8', 'hello');
     assert.deepStrictEqual(headMain(mockReadFileSync, 'content.txt',
-      'content.txt'), ['hello', 'hello']);
+      'content.txt'), ['\nhello', '\nhello']);
   });
 });

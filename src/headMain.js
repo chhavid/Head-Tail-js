@@ -16,7 +16,7 @@ const headFile = function (readFile, file, options) {
       file,
     };
   }
-  return head(content, options);
+  return `\n${head(content, options)}`;
 };
 
 const headMain = function (readFile, ...args) {
