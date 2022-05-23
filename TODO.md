@@ -5,10 +5,10 @@
 
 **Consider:**
 
-- [ ] Giving array of objects for filename and content in mock function.
 
 **DONE:**
 
+- [x] Giving array of objects for filename and content in mock function.
 - [x] Move validations in separate file.
 - [x] Test formatArgs.
 - [x] Removed regular expressions from conditions.

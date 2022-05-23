@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { exit } = require('process');
 
 const { headMain } = require('./src/headMain.js');
 
@@ -13,7 +14,7 @@ const main = () => {
     console.log(...content);
   } catch (error) {
     console.log(error.message);
-    process.exit(3);
+    exit(1);
   }
 };
 

@@ -36,12 +36,12 @@ describe('head', () => {
   });
 });
 
-const readFile = (mockFile, expEncoding, content) => {
+const readFile = (mockFiles, expEncoding) => {
   let index = 0;
   return function (files, encoding) {
-    assert.equal(mockFile[index], files);
+    assert.equal(mockFiles[index].name, files);
     assert.equal(encoding, expEncoding);
-    const fileContent = content[index];
+    const fileContent = mockFiles[index].content;
     index++;
     return fileContent;
   };
@@ -49,12 +49,16 @@ const readFile = (mockFile, expEncoding, content) => {
 
 describe('headFile', () => {
   it('should give line of single file', () => {
-    const mockReadFileSync = readFile(['content.txt'], 'utf8', ['hello']);
+    const mockReadFileSync = readFile([{
+      name: 'content.txt', content: 'hello'
+    }], 'utf8');
     assert.deepStrictEqual(headFile(
       mockReadFileSync, 'content.txt', { count: 1 }), 'hello');
   });
   it('should give multiple lines of single file', () => {
-    const mockReadFileSync = readFile(['content.txt'], 'utf8', ['hello\nbye']);
+    const mockReadFileSync = readFile([{
+      name: 'content.txt', content: 'hello\nbye'
+    }], 'utf8');
     assert.deepStrictEqual(headFile(
       mockReadFileSync, 'content.txt', { count: 2 }), 'hello\nbye');
   });
@@ -62,19 +66,24 @@ describe('headFile', () => {
 
 describe('headMain', () => {
   it('should give line of single file', () => {
-    const mockReadFileSync = readFile(['content.txt'], 'utf8', ['hello']);
+    const mockReadFileSync = readFile([{
+      name: 'content.txt',
+      content: 'hello'
+    }], 'utf8');
     assert.deepStrictEqual(headMain(mockReadFileSync, 'content.txt'),
       ['hello']);
   });
   it('should give line of two files', () => {
-    const mockReadFileSync = readFile(['content.txt', 'a.txt'], 'utf8',
-      ['hello', 'bye']);
+    const mockReadFileSync = readFile([{ name: 'content.txt', content: 'hello' }
+      , { name: 'a.txt', content: 'bye' }], 'utf8');
     assert.deepStrictEqual(headMain(mockReadFileSync, 'content.txt',
       'a.txt'), ['==>content.txt<==\nhello\n\n', '==>a.txt<==\nbye\n\n']);
   });
   it('should give line of multiple files', () => {
-    const mockReadFileSync = readFile(['content.txt', 'a.txt', 'b.txt'], 'utf8',
-      ['hello', 'bye', 'hey']);
+    const mockReadFileSync = readFile([{
+      name: 'content.txt', content: 'hello'
+    }, { name: 'a.txt', content: 'bye' },
+    { name: 'b.txt', content: 'hey' }], 'utf8');
     assert.deepStrictEqual(headMain(mockReadFileSync, 'content.txt',
       'a.txt', 'b.txt'), ['==>content.txt<==\nhello\n\n',
       '==>a.txt<==\nbye\n\n', '==>b.txt<==\nhey\n\n']);
