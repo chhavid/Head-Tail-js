@@ -22,9 +22,11 @@ const validateOptions = function (option, newOption) {
   if (/^-\d/.test(newOption)) {
     return '';
   } else if (!keys[newOption.slice(0, 2)]) {
-    throw `illegal option ${newOption}`;
+    throw {
+      message: `illegal option ${newOption}`
+    };
   } else if (option !== keys[newOption.slice(0, 2)]) {
-    throw 'can not combine line and byte counts';
+    throw { message: 'can not combine line and byte counts' };
   }
 };
 
@@ -41,7 +43,7 @@ const parseArgs = function (args) {
       index++;
     }
   }
-  throw 'usage: head [-n lines | -c bytes] [file ...]';
+  throw { message: 'usage: head [-n lines | -c bytes] [file ...]' };
 };
 
 exports.parseArgs = parseArgs;

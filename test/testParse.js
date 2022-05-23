@@ -67,22 +67,39 @@ describe('parseArgs', () => {
 });
 describe('getOptions', () => {
   it('should give default option', () => {
-    return assert.deepStrictEqual(getOptions(''),
+    assert.deepStrictEqual(getOptions(''),
       { name: 'count', limit: 10 });
   });
   it('should give bytes option ', () => {
-    return assert.deepStrictEqual(getOptions('-c'),
+    assert.deepStrictEqual(getOptions('-c'),
       { name: 'bytes', limit: 10 });
   });
 });
 describe('getLimit', () => {
   it('should give specified limit with count option', () => {
-    return assert.strictEqual(getLimit('-n3'), 3);
+    assert.strictEqual(getLimit('-n3'), 3);
   });
   it('should give specified limit with bytes option', () => {
-    return assert.strictEqual(getLimit('-c2'), 2);
+    assert.strictEqual(getLimit('-c2'), 2);
   });
   it('should give direct specified limit ', () => {
-    return assert.strictEqual(getLimit('-2'), 2);
+    assert.strictEqual(getLimit('-2'), 2);
+  });
+});
+
+describe('validateOptions', () => {
+  it('should throw error if invalid option is passed', () => {
+    assert.throws(() => validateOptions('count', '-a'),
+      { message: 'illegal option -a' });
+  });
+  it('should throw error if both options are passed', () => {
+    assert.throws(() => validateOptions('count', '-c'),
+      { message: 'can not combine line and byte counts' });
+  });
+  it('should return if option is direct value', () => {
+    assert.strictEqual(validateOptions('count', '-2'), '');
+  });
+  it('should return if option is correct and same', () => {
+    assert.strictEqual(validateOptions('count', '-n'), undefined);
   });
 });

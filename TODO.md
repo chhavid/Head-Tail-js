@@ -1,8 +1,6 @@
 **TODO:**
 
 - [ ] Refactor parseArgs.
-- [ ] Test intermediate parse functions.
-- [ ] Test validate options.
 
 **Consider:**
 
@@ -10,6 +8,9 @@
 
 **DONE:**
 
+- [x] Throw objects.
+- [x] Test intermediate parse functions.
+- [x] Test validate options.
 - [x] Should give error if both options are given together.
 - [x] Should also accept -num as -n num.
 - [x] Should work without space between n and num.

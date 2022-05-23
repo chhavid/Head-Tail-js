@@ -31,7 +31,7 @@ const headMain = function (readFile, ...args) {
   try {
     ({ files, options } = parseArgs(args));
   } catch (error) {
-    return [error];
+    return [error.message];
   }
   const numOfFiles = files.length;
   return files.map((file) => headFile(readFile, file, options, numOfFiles));
