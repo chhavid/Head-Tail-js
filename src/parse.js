@@ -23,6 +23,8 @@ const validateOptions = function (option, newOption) {
     return '';
   } else if (!keys[newOption.slice(0, 2)]) {
     throw `illegal option ${newOption}`;
+  } else if (option !== keys[newOption.slice(0, 2)]) {
+    throw 'can not combine line and byte counts';
   }
 };
 
@@ -43,3 +45,4 @@ const parseArgs = function (args) {
 };
 
 exports.parseArgs = parseArgs;
+exports.validateOptions = validateOptions;

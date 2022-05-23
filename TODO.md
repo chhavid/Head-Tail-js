@@ -1,7 +1,6 @@
 **TODO:**
 
 - [ ] Refactor parseArgs.
-- [ ] Should give error if both options are given together.
 - [ ] Test intermediate parse functions.
 
 **Consider:**
@@ -10,6 +9,7 @@
 
 **DONE:**
 
+- [x] Should give error if both options are given together.
 - [x] Should also accept -num as -n num.
 - [x] Should work without space between n and num.
 - [x] Should give error if any other option than -n and -c is given.
