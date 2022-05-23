@@ -2,6 +2,8 @@
 
 - [ ] Refactor parseArgs.
 - [ ] Implement tail.
+- [ ] Correct `illegal count` error.
+- [ ] Change name `count` to `line`.
 
 **Consider:**
 
