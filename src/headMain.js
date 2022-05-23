@@ -8,33 +8,25 @@ const head = function (content, { name, limit }) {
 };
 
 const formatContent = function (content, file, numOfFiles) {
-  const heading = '==>' + file + '<==' + '\n';
+  const heading = '==> ' + file + ' <==' + '\n';
   return numOfFiles > 1 ? heading + content + '\n\n' : content;
 };
 
-const headFile = function (readFile, file, options, numOfFiles) {
-  let content;
-  try {
-    content = readFile(file, 'utf8');
-  } catch (error) {
-    throw { message: `head: ${file}: No such file or directory\n` };
-  }
-  const fileContent = head(content, options);
-  return formatContent(fileContent, file, numOfFiles);
-};
-
-const headMain = function (readFile, ...args) {
-  let files, options;
+const headMain = function (readFile, { log, error }, ...args) {
   validateArgs(args);
-  try {
-    ({ files, options } = parseArgs(args));
-  } catch (error) {
-    throw { message: error.message };
-  }
-  const numOfFiles = files.length;
-  return files.map((file) => headFile(readFile, file, options, numOfFiles));
+  const { files, options } = parseArgs(args);
+  let exitCode = 0;
+  files.forEach((file) => {
+    try {
+      const content = head(readFile(file, 'utf8'), options);
+      log(formatContent(content, file, files.length));
+    } catch (err) {
+      exitCode = 1;
+      error('head: ' + file + ': No such file or directory');
+    }
+  });
+  return exitCode;
 };
 
 exports.head = head;
 exports.headMain = headMain;
-exports.headFile = headFile;

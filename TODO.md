@@ -2,12 +2,14 @@
 
 - [ ] Refactor parseArgs.
 - [ ] Implement tail.
+- [ ] Make mock for console of log and error.
 
 **Consider:**
 
 
 **DONE:**
 
+- [x] Should give console error of file is invalid.
 - [x] Modified and throwing error messages.
 - [x] Correct `illegal count` error.
 - [x] Change name `count` to `line`.

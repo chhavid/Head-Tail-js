@@ -1,5 +1,6 @@
 const assert = require('assert');
-const { head, headMain, headFile } = require('../src/headMain.js');
+const { log, error } = require('console');
+const { head, headMain } = require('../src/headMain.js');
 
 describe('head', () => {
   it('should give the content of single line', () => {
@@ -47,45 +48,33 @@ const readFile = (mockFiles, expEncoding) => {
   };
 };
 
-describe('headFile', () => {
-  it('should give line of single file', () => {
-    const mockReadFileSync = readFile([{
-      name: 'content.txt', content: 'hello'
-    }], 'utf8');
-    assert.deepStrictEqual(headFile(
-      mockReadFileSync, 'content.txt', { count: 1 }), 'hello');
-  });
-  it('should give multiple lines of single file', () => {
-    const mockReadFileSync = readFile([{
-      name: 'content.txt', content: 'hello\nbye'
-    }], 'utf8');
-    assert.deepStrictEqual(headFile(
-      mockReadFileSync, 'content.txt', { count: 2 }), 'hello\nbye');
-  });
-});
-
 describe('headMain', () => {
   it('should give line of single file', () => {
     const mockReadFileSync = readFile([{
       name: 'content.txt',
       content: 'hello'
     }], 'utf8');
-    assert.deepStrictEqual(headMain(mockReadFileSync, 'content.txt'),
-      ['hello']);
+    assert.strictEqual(headMain(mockReadFileSync,
+      console, '-n', '1', 'content.txt'), 0);
   });
   it('should give line of two files', () => {
-    const mockReadFileSync = readFile([{ name: 'content.txt', content: 'hello' }
-      , { name: 'a.txt', content: 'bye' }], 'utf8');
-    assert.deepStrictEqual(headMain(mockReadFileSync, 'content.txt',
-      'a.txt'), ['==>content.txt<==\nhello\n\n', '==>a.txt<==\nbye\n\n']);
+    const mockReadFileSync = readFile([{
+      name: 'content.txt', content: 'hello'
+    }, { name: 'a.txt', content: 'bye' }], 'utf8');
+    assert.strictEqual(headMain(mockReadFileSync, console, 'content.txt',
+      'a.txt'), 0);
   });
   it('should give line of multiple files', () => {
     const mockReadFileSync = readFile([{
       name: 'content.txt', content: 'hello'
     }, { name: 'a.txt', content: 'bye' },
     { name: 'b.txt', content: 'hey' }], 'utf8');
-    assert.deepStrictEqual(headMain(mockReadFileSync, 'content.txt',
-      'a.txt', 'b.txt'), ['==>content.txt<==\nhello\n\n',
-      '==>a.txt<==\nbye\n\n', '==>b.txt<==\nhey\n\n']);
+    assert.strictEqual(headMain(mockReadFileSync, console, 'content.txt',
+      'a.txt', 'b.txt'), 0);
+  });
+  it('should give error if file is invalid', () => {
+    const mockReadFileSync = readFile([], 'utf8');
+    assert.strictEqual(headMain(mockReadFileSync,
+      console, '-n', '1', 'a.txt'), 1);
   });
 });
