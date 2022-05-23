@@ -10,13 +10,21 @@ const validateLimit = function (limit) {
   }
 };
 
+const isOptionValid = function (option, keys) {
+  return keys[option.slice(0, 2)];
+};
+
+const isCombined = function (prevOption, newOption, keys) {
+  return prevOption !== keys[newOption.slice(0, 2)];
+};
+
 const validateOptions = function (options, newOption) {
   const keys = { '-n': 'count', '-c': 'bytes' };
   if (isFinite(newOption[1])) {
     return '';
-  } else if (!keys[newOption.slice(0, 2)]) {
+  } if (!isOptionValid(newOption, keys)) {
     throw { message: `invalid option ${newOption}` };
-  } else if (options.name !== keys[newOption.slice(0, 2)]) {
+  } if (isCombined(options.name, newOption, keys)) {
     throw { message: 'can not combine line and byte counts' };
   }
   validateLimit(options.limit);
