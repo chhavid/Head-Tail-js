@@ -5,63 +5,63 @@ const { parseArgs, getOptions, formatArgs } =
 describe('parseArgs', () => {
   it('should parse only filename.', () => {
     assert.deepStrictEqual(parseArgs(['a.txt']), {
-      files: ['a.txt'], options: { name: 'lines', limit: 10 }
+      files: ['a.txt'], options: { name: 'line', limit: 10 }
     });
   });
 
   it('should parse filename with count.', () => {
     assert.deepStrictEqual(parseArgs(['-n', '5', 'a.txt']), {
-      files: ['a.txt'], options: { name: 'lines', limit: 5 }
+      files: ['a.txt'], options: { name: 'line', limit: 5 }
     });
   });
 
   it('should parse filename with bytes.', () => {
     assert.deepStrictEqual(parseArgs(['-c', '10', 'a.txt']), {
-      files: ['a.txt'], options: { name: 'bytes', limit: 10 }
+      files: ['a.txt'], options: { name: 'byte', limit: 10 }
     });
   });
   it('should parse two filenames.', () => {
     assert.deepStrictEqual(parseArgs(['b.txt', 'a.txt']), {
-      files: ['b.txt', 'a.txt'], options: { name: 'lines', limit: 10 }
+      files: ['b.txt', 'a.txt'], options: { name: 'line', limit: 10 }
     });
   });
   it('should parse multiple filenames.', () => {
     assert.deepStrictEqual(parseArgs(['b.txt', 'a.txt', 'c.txt']), {
       files: ['b.txt', 'a.txt', 'c.txt'],
-      options: { name: 'lines', limit: 10 }
+      options: { name: 'line', limit: 10 }
     });
   });
   it('should parse more than one filename with count.', () => {
     assert.deepStrictEqual(parseArgs(['-n', '5', 'b.txt', 'a.txt']), {
-      files: ['b.txt', 'a.txt'], options: { name: 'lines', limit: 5 }
+      files: ['b.txt', 'a.txt'], options: { name: 'line', limit: 5 }
     });
   });
   it('should parse more than one filename with byte.', () => {
     assert.deepStrictEqual(parseArgs(['-c', '10', 'b.txt', 'a.txt']), {
-      files: ['b.txt', 'a.txt'], options: { name: 'bytes', limit: 10 }
+      files: ['b.txt', 'a.txt'], options: { name: 'byte', limit: 10 }
     });
   });
   it('should override the limit if same option is given again.', () => {
     assert.deepStrictEqual(parseArgs(['-n2', '-n3', 'a.txt']), {
-      files: ['a.txt'], options: { name: 'lines', limit: 3 }
+      files: ['a.txt'], options: { name: 'line', limit: 3 }
     });
   });
   it('should parse file without options.', () => {
     assert.deepStrictEqual(parseArgs(['a.txt']),
       {
-        files: ['a.txt'], options: { name: 'lines', limit: 10 }
+        files: ['a.txt'], options: { name: 'line', limit: 10 }
       });
   });
   it('should parse file without space in option.', () => {
     assert.deepStrictEqual(parseArgs(['-n2', 'a.txt']),
       {
-        files: ['a.txt'], options: { name: 'lines', limit: 2 }
+        files: ['a.txt'], options: { name: 'line', limit: 2 }
       });
   });
   it('should parse if only number is given as option.', () => {
     assert.deepStrictEqual(parseArgs(['-2', 'a.txt']),
       {
-        files: ['a.txt'], options: { name: 'lines', limit: 2 }
+        files: ['a.txt'], options: { name: 'line', limit: 2 }
       });
   });
 });
@@ -69,11 +69,11 @@ describe('parseArgs', () => {
 describe('getOptions', () => {
   it('should give default option', () => {
     assert.deepStrictEqual(getOptions(''),
-      { name: 'lines', limit: 10 });
+      { name: 'line', limit: 10 });
   });
   it('should give bytes option ', () => {
     assert.deepStrictEqual(getOptions('-c'),
-      { name: 'bytes', limit: 10 });
+      { name: 'byte', limit: 10 });
   });
 });
 

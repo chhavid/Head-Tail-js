@@ -19,7 +19,7 @@ const isCombined = function (prevOption, newOption, keys) {
 };
 
 const validateOptions = function (options, newOption) {
-  const keys = { '-n': 'lines', '-c': 'bytes' };
+  const keys = { '-n': 'line', '-c': 'byte' };
   if (isFinite(newOption[1])) {
     return '';
   } if (!isOptionValid(newOption, keys)) {

@@ -2,13 +2,13 @@
 
 - [ ] Refactor parseArgs.
 - [ ] Implement tail.
-- [ ] Correct `illegal count` error.
 
 **Consider:**
 
 
 **DONE:**
 
+- [x] Correct `illegal count` error.
 - [x] Change name `count` to `line`.
 - [x] For both valid and invalid files, should give head of valid one and error for invalid file.
 - [x] Added validation of arguments in headMain.

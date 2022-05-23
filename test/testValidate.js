@@ -4,26 +4,26 @@ const { validateOptions, validateLimit, validateArgs } =
 
 describe('validateOptions', () => {
   it('should throw error if invalid option is passed', () => {
-    assert.throws(() => validateOptions({ name: 'lines', limit: 10 }, '-a'),
+    assert.throws(() => validateOptions({ name: 'line', limit: 10 }, '-a'),
       { message: 'invalid option -a' });
   });
   it('should throw error if both options are passed', () => {
-    assert.throws(() => validateOptions({ name: 'lines', limit: 10 }, '-c'),
+    assert.throws(() => validateOptions({ name: 'line', limit: 10 }, '-c'),
       { message: 'can not combine line and byte counts' });
   });
   it('should return if option is direct value', () => {
-    assert.strictEqual(validateOptions({ name: 'lines', limit: 10 }, '-2'), '');
+    assert.strictEqual(validateOptions({ name: 'line', limit: 10 }, '-2'), '');
   });
   it('should return if option is correct and same', () => {
-    assert.strictEqual(validateOptions({ name: 'lines', limit: 10 }, '-n'),
+    assert.strictEqual(validateOptions({ name: 'line', limit: 10 }, '-n'),
       undefined);
   });
 });
 
 describe('validateLimit', () => {
   it('should throw error if value is 0', () => {
-    assert.throws(() => validateLimit({ name: 'lines', limit: 0 }),
-      { message: 'head: illegal lines count -- 0' });
+    assert.throws(() => validateLimit({ name: 'line', limit: 0 }),
+      { message: 'head: illegal line count -- 0' });
   });
 });
 

@@ -1,9 +1,9 @@
 const { validateOptions, isOption } = require('./validate.js');
 
 const getOptions = function (arg) {
-  const options = { name: 'lines', limit: 10 };
+  const options = { name: 'line', limit: 10 };
   if (arg.slice(0, 2) === '-c') {
-    options.name = 'bytes';
+    options.name = 'byte';
   }
   return options;
 };
