@@ -41,10 +41,27 @@ describe('parseArgs', () => {
       files: ['b.txt', 'a.txt'], options: { name: 'bytes', limit: 10 }
     });
   });
+  it('should override the limit if same option is given again.', () => {
+    assert.deepStrictEqual(parseArgs(['-n2', '-n3', 'a.txt']), {
+      files: ['a.txt'], options: { name: 'count', limit: 3 }
+    });
+  });
   it('should parse file without options.', () => {
     return assert.deepStrictEqual(parseArgs(['a.txt']),
       {
         files: ['a.txt'], options: { name: 'count', limit: 10 }
+      });
+  });
+  it('should parse file without space in option.', () => {
+    return assert.deepStrictEqual(parseArgs(['-n2', 'a.txt']),
+      {
+        files: ['a.txt'], options: { name: 'count', limit: 2 }
+      });
+  });
+  it('should parse if only number is given as option.', () => {
+    return assert.deepStrictEqual(parseArgs(['-2', 'a.txt']),
+      {
+        files: ['a.txt'], options: { name: 'count', limit: 2 }
       });
   });
 });

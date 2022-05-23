@@ -2,7 +2,7 @@
 
 - [ ] Refactor parseArgs.
 - [ ] Should give error if both options are given together.
-- [ ] Should also except -num as -n num.
+- [ ] Test intermediate parse functions.
 
 **Consider:**
 
@@ -10,6 +10,9 @@
 
 **DONE:**
 
+- [x] Should also accept -num as -n num.
+- [x] Should work without space between n and num.
+- [x] Should give error if any other option than -n and -c is given.
 - [x] Should give error if there is options but no file.
 - [x] Format output with spaces ,symbol and fileName.
 - [x] Should override the option if same option is given again.
