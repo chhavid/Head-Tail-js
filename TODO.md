@@ -2,6 +2,7 @@
 
 - [ ] Refactor parseArgs.
 - [ ] Test intermediate parse functions.
+- [ ] Test validate options.
 
 **Consider:**
 

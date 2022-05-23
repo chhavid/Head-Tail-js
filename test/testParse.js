@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { parseArgs } =
+const { parseArgs, validateOptions, getOptions, getLimit } =
   require('../src/parse.js');
 
 describe('parseArgs', () => {
@@ -47,21 +47,42 @@ describe('parseArgs', () => {
     });
   });
   it('should parse file without options.', () => {
-    return assert.deepStrictEqual(parseArgs(['a.txt']),
+    assert.deepStrictEqual(parseArgs(['a.txt']),
       {
         files: ['a.txt'], options: { name: 'count', limit: 10 }
       });
   });
   it('should parse file without space in option.', () => {
-    return assert.deepStrictEqual(parseArgs(['-n2', 'a.txt']),
+    assert.deepStrictEqual(parseArgs(['-n2', 'a.txt']),
       {
         files: ['a.txt'], options: { name: 'count', limit: 2 }
       });
   });
   it('should parse if only number is given as option.', () => {
-    return assert.deepStrictEqual(parseArgs(['-2', 'a.txt']),
+    assert.deepStrictEqual(parseArgs(['-2', 'a.txt']),
       {
         files: ['a.txt'], options: { name: 'count', limit: 2 }
       });
+  });
+});
+describe('getOptions', () => {
+  it('should give default option', () => {
+    return assert.deepStrictEqual(getOptions(''),
+      { name: 'count', limit: 10 });
+  });
+  it('should give bytes option ', () => {
+    return assert.deepStrictEqual(getOptions('-c'),
+      { name: 'bytes', limit: 10 });
+  });
+});
+describe('getLimit', () => {
+  it('should give specified limit with count option', () => {
+    return assert.strictEqual(getLimit('-n3'), 3);
+  });
+  it('should give specified limit with bytes option', () => {
+    return assert.strictEqual(getLimit('-c2'), 2);
+  });
+  it('should give direct specified limit ', () => {
+    return assert.strictEqual(getLimit('-2'), 2);
   });
 });

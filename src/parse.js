@@ -46,3 +46,5 @@ const parseArgs = function (args) {
 
 exports.parseArgs = parseArgs;
 exports.validateOptions = validateOptions;
+exports.getOptions = getOptions;
+exports.getLimit = getLimit;
