@@ -17,9 +17,8 @@ const headFile = function (readFile, file, options, numOfFiles) {
     content = readFile(file, 'utf8');
   } catch (error) {
     throw {
-      name: 'FileReadError',
-      message: `Unable to read ${file}`,
-      file,
+      name: 'Reference Error',
+      message: `head: ${file}: No such file or directory`,
     };
   }
   const fileContent = head(content, options);
