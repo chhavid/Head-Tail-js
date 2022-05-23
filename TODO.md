@@ -1,6 +1,5 @@
 **TODO:**
 
-- [ ] Set contract for `tail`.
 - [ ] Read how tail works.
 - [ ] Make `tailLib.js`.
 - [ ] Make `testTailLib.js`.
@@ -12,6 +11,7 @@
 
 **DONE:**
 
+- [x] Set contract for `tail`.
 - [x] Make mock for console of log and error.
 - [x] Should give console error of file is invalid.
 - [x] Modified and throwing error messages.

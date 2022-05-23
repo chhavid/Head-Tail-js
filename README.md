@@ -15,3 +15,20 @@ If more than a single file is specified, each file is preceded by a header consi
 “XXX” is the name of the file.
 
 ```
+
+ `tail [-c # | -n #] [file ...]`
+
+ ```
+tail file...
+   Displays the last part of a file.
+   Numbers having a leading plus (‘+’) sign are relative to the beginning of the input. Numbers having a leading minus (‘-’) sign or no explicit sign are relative to the end of the input. The default starting location is the last 10 lines of the input.
+
+tail -c number, --bytes=number
+   The location is number bytes.
+
+tail -n number, --lines=number
+   The location is number lines.
+
+If more than a single file is specified, each file is preceded by a header consisting of the string “==> XXX <==” where “XXX” is the name of the file.
+
+ ```
