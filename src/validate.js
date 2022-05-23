@@ -4,9 +4,9 @@ const validateArgs = function (args) {
   }
 };
 
-const validateLimit = function (limit) {
-  if (!limit) {
-    throw { message: 'head: illegal count' };
+const validateLimit = function ({ name, limit }) {
+  if (!+limit) {
+    throw { message: `head: illegal ${name} count -- ${limit}` };
   }
 };
 
@@ -27,7 +27,8 @@ const validateOptions = function (options, newOption) {
   } if (isCombined(options.name, newOption, keys)) {
     throw { message: 'can not combine line and byte counts' };
   }
-  validateLimit(options.limit);
+  validateLimit(options);
+  options.limit = +options.limit;
 };
 
 const isOption = function (arg) {

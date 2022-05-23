@@ -22,12 +22,12 @@ describe('validateOptions', () => {
 
 describe('validateLimit', () => {
   it('should throw error if value is 0', () => {
-    assert.throws(() => validateLimit(0),
-      { message: 'head: illegal count' });
+    assert.throws(() => validateLimit({ name: 'lines', limit: 0 }),
+      { message: 'head: illegal lines count -- 0' });
   });
 });
 
-describe('validate', () => {
+describe('validateArgs', () => {
   it('should throw error if args length is 0', () => {
     assert.throws(() => validateArgs([]),
       { message: 'usage: head [-n lines | -c bytes] [file ...]' });

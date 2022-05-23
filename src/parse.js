@@ -29,7 +29,7 @@ const parseArgs = function (parameters) {
       const files = args.slice(index);
       return { files, options };
     }
-    options.limit = +args[index + 1];
+    options.limit = args[index + 1];
     validateOptions(options, args[index]);
   }
   throw { message: 'usage: head [-n lines | -c bytes] [file ...]' };

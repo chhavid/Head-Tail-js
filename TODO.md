@@ -3,13 +3,13 @@
 - [ ] Refactor parseArgs.
 - [ ] Implement tail.
 - [ ] Correct `illegal count` error.
-- [ ] Change name `count` to `line`.
 
 **Consider:**
 
 
 **DONE:**
 
+- [x] Change name `count` to `line`.
 - [x] For both valid and invalid files, should give head of valid one and error for invalid file.
 - [x] Added validation of arguments in headMain.
 - [x] Giving array of objects for filename and content in mock function.
