@@ -8,6 +8,7 @@
 
 **DONE:**
 
+- [x] Should throw error if count is 0
 - [x] Throw objects.
 - [x] Test intermediate parse functions.
 - [x] Test validate options.

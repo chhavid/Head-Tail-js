@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { parseArgs, validateOptions, getOptions, getLimit } =
+const { parseArgs, validateOptions, getOptions, getLimit, validateLimit } =
   require('../src/parse.js');
 
 describe('parseArgs', () => {
@@ -90,7 +90,7 @@ describe('getLimit', () => {
 describe('validateOptions', () => {
   it('should throw error if invalid option is passed', () => {
     assert.throws(() => validateOptions('count', '-a'),
-      { message: 'illegal option -a' });
+      { message: 'invalid option -a' });
   });
   it('should throw error if both options are passed', () => {
     assert.throws(() => validateOptions('count', '-c'),
@@ -101,5 +101,11 @@ describe('validateOptions', () => {
   });
   it('should return if option is correct and same', () => {
     assert.strictEqual(validateOptions('count', '-n'), undefined);
+  });
+});
+describe('validateOptions', () => {
+  it('should throw error if value is 0', () => {
+    assert.throws(() => validateLimit(0),
+      { message: 'head: illegal count -- 0' });
   });
 });
