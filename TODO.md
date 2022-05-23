@@ -1,6 +1,8 @@
 **TODO:**
 
 - [ ] Refactor parseArgs.
+- [ ] Test formatArgs.
+- [ ] Implement tail.
 
 **Consider:**
 

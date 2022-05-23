@@ -89,18 +89,19 @@ describe('getLimit', () => {
 
 describe('validateOptions', () => {
   it('should throw error if invalid option is passed', () => {
-    assert.throws(() => validateOptions('count', '-a'),
+    assert.throws(() => validateOptions({ name: 'count', limit: 10 }, '-a'),
       { message: 'invalid option -a' });
   });
   it('should throw error if both options are passed', () => {
-    assert.throws(() => validateOptions('count', '-c'),
+    assert.throws(() => validateOptions({ name: 'count', limit: 10 }, '-c'),
       { message: 'can not combine line and byte counts' });
   });
   it('should return if option is direct value', () => {
-    assert.strictEqual(validateOptions('count', '-2'), '');
+    assert.strictEqual(validateOptions({ name: 'count', limit: 10 }, '-2'), '');
   });
   it('should return if option is correct and same', () => {
-    assert.strictEqual(validateOptions('count', '-n'), undefined);
+    assert.strictEqual(validateOptions({ name: 'count', limit: 10 }, '-n'),
+      undefined);
   });
 });
 describe('validateOptions', () => {

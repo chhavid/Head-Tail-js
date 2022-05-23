@@ -1,7 +1,3 @@
-const hasValue = function (option) {
-  return /^-.*\d/.test(option);
-};
-
 const getOptions = function (arg) {
   const options = { name: 'count', limit: 10 };
   if (arg.slice(0, 2) === '-c') {
@@ -19,39 +15,40 @@ const getLimit = function (args) {
 
 const validateLimit = function (limit) {
   if (!limit) {
-    throw {
-      message: 'head: illegal count -- 0'
-    };
+    throw { message: 'head: illegal count -- 0' };
   }
 };
 
-const validateOptions = function (option, newOption) {
+const formatArg = function (arg) {
+  if (/^-\d/.test(arg)) {
+    return ['-n', arg.slice(1)];
+  }
+  return arg.startsWith('-') ? [arg.slice(0, 2), arg.slice(2)] : arg;
+};
+
+const validateOptions = function (options, newOption) {
   const keys = { '-n': 'count', '-c': 'bytes' };
   if (/^-\d/.test(newOption)) {
     return '';
   } else if (!keys[newOption.slice(0, 2)]) {
-    throw {
-      message: `invalid option ${newOption}`
-    };
-  } else if (option !== keys[newOption.slice(0, 2)]) {
+    throw { message: `invalid option ${newOption}` };
+  } else if (options.name !== keys[newOption.slice(0, 2)]) {
     throw { message: 'can not combine line and byte counts' };
   }
+  validateLimit(options.limit);
 };
 
-// eslint-disable-next-line max-statements
-const parseArgs = function (args) {
-  const options = getOptions(args[0]);
-  for (let index = 0; index < args.length; index++) {
+const parseArgs = function (parameters) {
+  const options = getOptions(parameters[0]);
+  const args = parameters.flatMap(formatArg).filter(arg => arg.length > 0);
+
+  for (let index = 0; index < args.length; index += 2) {
     if (!/^-./.test(args[index])) {
-      return { files: [...args.slice(index)], options };
+      const files = args.slice(index);
+      return { files, options };
     }
-    validateOptions(options.name, args[index]);
-    options.limit = getLimit(args[index]);
-    if (!hasValue(args[index])) {
-      options.limit = +args[index + 1];
-      index++;
-    }
-    validateLimit(options.limit);
+    options.limit = +args[index + 1];
+    validateOptions(options, args[index]);
   }
   throw { message: 'usage: head [-n lines | -c bytes] [file ...]' };
 };
