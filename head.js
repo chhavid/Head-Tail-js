@@ -13,6 +13,7 @@ const main = () => {
     console.log(...content);
   } catch (error) {
     console.log(error.message);
+    process.exit(3);
   }
 };
 

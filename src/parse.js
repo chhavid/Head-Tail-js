@@ -6,29 +6,27 @@ const getOptions = function (arg) {
   return options;
 };
 
-const getLimit = function (args) {
-  if (/^-\d/.test(args)) {
-    return +args.slice(1);
-  }
-  return +args.slice(2);
-};
-
 const validateLimit = function (limit) {
   if (!limit) {
     throw { message: 'head: illegal count -- 0' };
   }
 };
 
-const formatArg = function (arg) {
-  if (/^-\d/.test(arg)) {
+const formatArgs = function (arg) {
+  if (arg.startsWith('-') && isFinite(arg[1])) {
     return ['-n', arg.slice(1)];
   }
   return arg.startsWith('-') ? [arg.slice(0, 2), arg.slice(2)] : arg;
 };
 
+const getArgs = function (args) {
+  const formattedArgs = args.flatMap(formatArgs);
+  return formattedArgs.filter(arg => arg.length > 0);
+};
+
 const validateOptions = function (options, newOption) {
   const keys = { '-n': 'count', '-c': 'bytes' };
-  if (/^-\d/.test(newOption)) {
+  if (isFinite(newOption[1])) {
     return '';
   } else if (!keys[newOption.slice(0, 2)]) {
     throw { message: `invalid option ${newOption}` };
@@ -38,12 +36,16 @@ const validateOptions = function (options, newOption) {
   validateLimit(options.limit);
 };
 
+const isOption = function (arg) {
+  return arg.startsWith('-');
+};
+
 const parseArgs = function (parameters) {
   const options = getOptions(parameters[0]);
-  const args = parameters.flatMap(formatArg).filter(arg => arg.length > 0);
+  const args = getArgs(parameters);
 
   for (let index = 0; index < args.length; index += 2) {
-    if (!/^-./.test(args[index])) {
+    if (!isOption(args[index])) {
       const files = args.slice(index);
       return { files, options };
     }
@@ -57,4 +59,4 @@ exports.parseArgs = parseArgs;
 exports.validateOptions = validateOptions;
 exports.validateLimit = validateLimit;
 exports.getOptions = getOptions;
-exports.getLimit = getLimit;
+exports.formatArgs = formatArgs;

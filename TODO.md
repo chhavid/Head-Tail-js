@@ -1,7 +1,7 @@
 **TODO:**
 
 - [ ] Refactor parseArgs.
-- [ ] Test formatArgs.
+- [ ] Move validations in separate file.
 - [ ] Implement tail.
 
 **Consider:**
@@ -10,6 +10,8 @@
 
 **DONE:**
 
+- [x] Test formatArgs.
+- [x] Removed regular expressions from conditions.
 - [x] Should throw error if count is 0
 - [x] Throw objects.
 - [x] Test intermediate parse functions.

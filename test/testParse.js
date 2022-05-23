@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { parseArgs, validateOptions, getOptions, getLimit, validateLimit } =
+const { parseArgs, validateOptions, getOptions, validateLimit, formatArgs } =
   require('../src/parse.js');
 
 describe('parseArgs', () => {
@@ -65,6 +65,7 @@ describe('parseArgs', () => {
       });
   });
 });
+
 describe('getOptions', () => {
   it('should give default option', () => {
     assert.deepStrictEqual(getOptions(''),
@@ -73,17 +74,6 @@ describe('getOptions', () => {
   it('should give bytes option ', () => {
     assert.deepStrictEqual(getOptions('-c'),
       { name: 'bytes', limit: 10 });
-  });
-});
-describe('getLimit', () => {
-  it('should give specified limit with count option', () => {
-    assert.strictEqual(getLimit('-n3'), 3);
-  });
-  it('should give specified limit with bytes option', () => {
-    assert.strictEqual(getLimit('-c2'), 2);
-  });
-  it('should give direct specified limit ', () => {
-    assert.strictEqual(getLimit('-2'), 2);
   });
 });
 
@@ -104,9 +94,23 @@ describe('validateOptions', () => {
       undefined);
   });
 });
-describe('validateOptions', () => {
+
+describe('validateLimit', () => {
   it('should throw error if value is 0', () => {
     assert.throws(() => validateLimit(0),
       { message: 'head: illegal count -- 0' });
   });
 });
+
+describe('formatArgs', () => {
+  it('should give option without value', () => {
+    assert.deepStrictEqual(formatArgs('-n'), ['-n', '']);
+  });
+  it('should give option with value', () => {
+    assert.deepStrictEqual(formatArgs('-n2'), ['-n', '2']);
+  });
+  it('should give direct value', () => {
+    assert.deepStrictEqual(formatArgs('-4'), ['-n', '4']);
+  });
+});
+
