@@ -1,6 +1,5 @@
 const assert = require('assert');
-const { parseArgs, getOptions, formatArgs } =
-  require('../src/parse.js');
+const { parseArgs, getOptions, formatArgs } = require('../src/parse.js');
 
 describe('parseArgs', () => {
   it('should parse only filename.', () => {
@@ -88,4 +87,3 @@ describe('formatArgs', () => {
     assert.deepStrictEqual(formatArgs('-4'), ['-n', '4']);
   });
 });
-

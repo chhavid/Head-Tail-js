@@ -1,14 +1,18 @@
 **TODO:**
 
+- [ ] Set contract for `tail`.
+- [ ] Read how tail works.
+- [ ] Make `tailLib.js`.
+- [ ] Make `testTailLib.js`.
 - [ ] Refactor parseArgs.
-- [ ] Implement tail.
-- [ ] Make mock for console of log and error.
+- [ ] Implement `tail`.
 
 **Consider:**
 
 
 **DONE:**
 
+- [x] Make mock for console of log and error.
 - [x] Should give console error of file is invalid.
 - [x] Modified and throwing error messages.
 - [x] Correct `illegal count` error.

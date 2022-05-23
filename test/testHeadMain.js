@@ -1,5 +1,4 @@
 const assert = require('assert');
-const console = require('console');
 const { head, headMain } = require('../src/headMain.js');
 
 describe('head', () => {
@@ -90,5 +89,12 @@ describe('headMain', () => {
     assert.strictEqual(headMain(mockReadFileSync,
       { log: mockedConsole, error: mockedConsole }, 'content.txt',
       'a.txt', 'b.txt'), 0);
+  });
+  it('should give error if file is invalid', () => {
+    const mockReadFileSync = readFile([], 'utf8');
+    const mockedConsole = mockConsole(
+      ['head: content.txt: No such file or directory']);
+    assert.strictEqual(headMain(mockReadFileSync,
+      { log: mockedConsole, error: mockedConsole }, 'content.txt'), 1);
   });
 });
