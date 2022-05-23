@@ -1,6 +1,12 @@
+const validateArgs = function (args) {
+  if (args.length === 0) {
+    throw { message: 'usage: head [-n lines | -c bytes] [file ...]' };
+  }
+};
+
 const validateLimit = function (limit) {
   if (!limit) {
-    throw { message: 'head: illegal count -- 0' };
+    throw { message: 'head: illegal count' };
   }
 };
 
@@ -23,3 +29,4 @@ const isOption = function (arg) {
 exports.validateOptions = validateOptions;
 exports.validateLimit = validateLimit;
 exports.isOption = isOption;
+exports.validateArgs = validateArgs;

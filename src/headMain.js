@@ -1,5 +1,6 @@
 const { parseArgs } = require('./parse.js');
 const { getLines, sliceUpto } = require('./headLib.js');
+const { validateArgs } = require('./validate.js');
 
 const head = function (content, { name, limit }) {
   return name === 'bytes'
@@ -27,6 +28,7 @@ const headFile = function (readFile, file, options, numOfFiles) {
 
 const headMain = function (readFile, ...args) {
   let files, options;
+  validateArgs(args);
   try {
     ({ files, options } = parseArgs(args));
   } catch (error) {

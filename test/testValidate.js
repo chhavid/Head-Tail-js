@@ -1,5 +1,6 @@
 const assert = require('assert');
-const { validateOptions, validateLimit } = require('../src/validate.js');
+const { validateOptions, validateLimit, validateArgs } =
+  require('../src/validate.js');
 
 describe('validateOptions', () => {
   it('should throw error if invalid option is passed', () => {
@@ -22,6 +23,13 @@ describe('validateOptions', () => {
 describe('validateLimit', () => {
   it('should throw error if value is 0', () => {
     assert.throws(() => validateLimit(0),
-      { message: 'head: illegal count -- 0' });
+      { message: 'head: illegal count' });
+  });
+});
+
+describe('validate', () => {
+  it('should throw error if args length is 0', () => {
+    assert.throws(() => validateArgs([]),
+      { message: 'usage: head [-n lines | -c bytes] [file ...]' });
   });
 });
