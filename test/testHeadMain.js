@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { log, error } = require('console');
+const console = require('console');
 const { head, headMain } = require('../src/headMain.js');
 
 describe('head', () => {
@@ -30,9 +30,9 @@ describe('head', () => {
       'aa');
   });
   it('should give lines upto specified bytes', () => {
-    assert.strictEqual(head('aaa\nb\nhello', { name: 'bytes', limit: 2 }),
+    assert.strictEqual(head('aaa\nb\nhello', { name: 'byte', limit: 2 }),
       'aa');
-    assert.strictEqual(head('aa\nb\nhello', { name: 'bytes', limit: 6 }),
+    assert.strictEqual(head('aa\nb\nhello', { name: 'byte', limit: 6 }),
       'aa\nb\nh');
   });
 });

@@ -3,13 +3,13 @@ const { getLines, sliceUpto } = require('./headLib.js');
 const { validateArgs } = require('./validate.js');
 
 const head = function (content, { name, limit }) {
-  return name === 'bytes'
+  return name === 'byte'
     ? sliceUpto(content, limit) : getLines(content, limit);
 };
 
 const formatContent = function (content, file, numOfFiles) {
   const heading = '==> ' + file + ' <==' + '\n';
-  return numOfFiles > 1 ? heading + content + '\n\n' : content;
+  return numOfFiles > 1 ? heading + content + '\n' : content;
 };
 
 const headMain = function (readFile, { log, error }, ...args) {
