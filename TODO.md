@@ -8,6 +8,7 @@
 
 **DONE:**
 
+- [x] For both valid and invalid files, should give head of valid one and error for invalid file.
 - [x] Added validation of arguments in headMain.
 - [x] Giving array of objects for filename and content in mock function.
 - [x] Move validations in separate file.
