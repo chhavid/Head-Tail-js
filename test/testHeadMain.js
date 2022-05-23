@@ -48,33 +48,47 @@ const readFile = (mockFiles, expEncoding) => {
   };
 };
 
+const mockConsole = (expContent) => {
+  let index = 0;
+  return function (content) {
+    assert.equal(expContent[index], content);
+    index++;
+  };
+};
+
 describe('headMain', () => {
   it('should give line of single file', () => {
     const mockReadFileSync = readFile([{
       name: 'content.txt',
       content: 'hello'
     }], 'utf8');
+    const mockedConsole = mockConsole(['hello']);
     assert.strictEqual(headMain(mockReadFileSync,
-      console, '-n', '1', 'content.txt'), 0);
+      { log: mockedConsole, error: mockedConsole },
+      '-n', '1', 'content.txt'), 0);
   });
+
   it('should give line of two files', () => {
     const mockReadFileSync = readFile([{
       name: 'content.txt', content: 'hello'
     }, { name: 'a.txt', content: 'bye' }], 'utf8');
-    assert.strictEqual(headMain(mockReadFileSync, console, 'content.txt',
+
+    const mockedConsole = mockConsole(['==> content.txt <==\nhello\n',
+      '==> a.txt <==\nbye\n']);
+    assert.strictEqual(headMain(mockReadFileSync,
+      { log: mockedConsole, error: mockedConsole }, 'content.txt',
       'a.txt'), 0);
   });
+
   it('should give line of multiple files', () => {
     const mockReadFileSync = readFile([{
       name: 'content.txt', content: 'hello'
     }, { name: 'a.txt', content: 'bye' },
     { name: 'b.txt', content: 'hey' }], 'utf8');
-    assert.strictEqual(headMain(mockReadFileSync, console, 'content.txt',
-      'a.txt', 'b.txt'), 0);
-  });
-  it('should give error if file is invalid', () => {
-    const mockReadFileSync = readFile([], 'utf8');
+    const mockedConsole = mockConsole(['==> content.txt <==\nhello\n',
+      '==> a.txt <==\nbye\n', '==> b.txt <==\nhey\n']);
     assert.strictEqual(headMain(mockReadFileSync,
-      console, '-n', '1', 'a.txt'), 1);
+      { log: mockedConsole, error: mockedConsole }, 'content.txt',
+      'a.txt', 'b.txt'), 0);
   });
 });
