@@ -5,11 +5,14 @@ const { validateOptions, validateLimit, validateArgs } =
 describe('validateOptions', () => {
   it('should throw error if invalid option is passed', () => {
     assert.throws(() => validateOptions({ name: 'line', limit: 10 }, '-a'),
-      { message: 'invalid option -a' });
+      {
+        message: 'head: invalid option -- a\n'
+          + 'usage: head [-n lines | -c bytes] [file ...]'
+      });
   });
   it('should throw error if both options are passed', () => {
     assert.throws(() => validateOptions({ name: 'line', limit: 10 }, '-c'),
-      { message: 'can not combine line and byte counts' });
+      { message: 'head: can\'t combine line and byte counts' });
   });
   it('should return if option is direct value', () => {
     assert.strictEqual(validateOptions({ name: 'line', limit: 10 }, '-2'), '');

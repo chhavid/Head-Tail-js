@@ -8,6 +8,7 @@
 
 **DONE:**
 
+- [x] Modified and throwing error messages.
 - [x] Correct `illegal count` error.
 - [x] Change name `count` to `line`.
 - [x] For both valid and invalid files, should give head of valid one and error for invalid file.

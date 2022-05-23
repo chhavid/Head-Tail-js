@@ -17,7 +17,7 @@ const headFile = function (readFile, file, options, numOfFiles) {
   try {
     content = readFile(file, 'utf8');
   } catch (error) {
-    return `head: ${file}: No such file or directory\n`;
+    throw { message: `head: ${file}: No such file or directory\n` };
   }
   const fileContent = head(content, options);
   return formatContent(fileContent, file, numOfFiles);
@@ -29,7 +29,7 @@ const headMain = function (readFile, ...args) {
   try {
     ({ files, options } = parseArgs(args));
   } catch (error) {
-    return [error.message];
+    throw { message: error.message };
   }
   const numOfFiles = files.length;
   return files.map((file) => headFile(readFile, file, options, numOfFiles));
