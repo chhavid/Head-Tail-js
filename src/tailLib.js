@@ -1,4 +1,4 @@
-const { splitContent, joinLines } = require('./headLib');
+const { splitContent, joinLines } = require('./utilityFns.js');
 
 const sliceFrom = (content, count) => content.slice(-count);
 

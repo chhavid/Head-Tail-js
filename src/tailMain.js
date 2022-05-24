@@ -1,4 +1,4 @@
-const { formatContent } = require('./headMain.js');
+const { getFormater } = require('./utilityFns.js');
 const { tail } = require('./tailLib.js');
 const { parseArgs } = require('./parse.js');
 
@@ -16,7 +16,8 @@ const tailMain = function (readFile, { log, error }, ...args) {
   files.forEach((file) => {
     try {
       const content = tail(readFile(file, 'utf8'), options);
-      log(formatContent(content, file, files.length));
+      const formatter = getFormater(files);
+      log(formatter(content, file, files.length));
     } catch (err) {
       exitCode = 1;
       error('tail: ' + file + ': No such file or directory');

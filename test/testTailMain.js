@@ -2,7 +2,7 @@ const assert = require('assert');
 const { tailMain, validateArgs } = require('../src/tailMain.js');
 const { mockConsole, readFile } = require('./testHeadMain.js');
 
-describe.skip('tailMain', () => {
+describe('tailMain', () => {
   it('should give line of single file', () => {
     const mockReadFileSync = readFile([{
       name: 'content.txt',

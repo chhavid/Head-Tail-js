@@ -1,9 +1,5 @@
-const NEWLINE = '\n';
+const { splitContent, joinLines } = require('./utilityFns');
 const startIndex = 0;
-
-const splitContent = (content) => content.split(NEWLINE);
-
-const joinLines = (lines) => lines.join(NEWLINE);
 
 const sliceUpto = (content, count) => content.slice(startIndex, count);
 
@@ -13,7 +9,9 @@ const getLines = function (content, count) {
   return joinLines(headLines);
 };
 
+const head = (content, { name, limit }) =>
+  name === 'byte' ? sliceUpto(content, limit) : getLines(content, limit);
+
 exports.getLines = getLines;
 exports.sliceUpto = sliceUpto;
-exports.splitContent = splitContent;
-exports.joinLines = joinLines;
+exports.head = head;

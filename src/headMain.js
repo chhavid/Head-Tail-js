@@ -1,14 +1,6 @@
 const { parseArgs } = require('./parse.js');
-const { getLines, sliceUpto } = require('./headLib.js');
-
-const head = (content, { name, limit }) =>
-  name === 'byte' ? sliceUpto(content, limit) : getLines(content, limit);
-
-const formatContent = (content, file) => `==> ${file} <==\n${content}\n`;
-
-const identityFormatter = (content) => content;
-
-const areMultipleFiles = (files) => files.length > 1;
+const { head } = require('./headLib.js');
+const { getFormater } = require('./utilityFns');
 
 const headForAFile = (file, readFile, options) => {
   const result = { file };
@@ -20,17 +12,17 @@ const headForAFile = (file, readFile, options) => {
   return result;
 };
 
-const print = (headContent, loggers, format) => {
+const print = (headContent, loggers, formater) => {
   if (headContent.error) {
     loggers.error(headContent.error);
     return;
   }
-  loggers.log(format(headContent.content, headContent.file));
+  loggers.log(formater(headContent.content, headContent.file));
 };
 
-const failedCount = (headResult) => headResult.find((res) => res.error) ? 1 : 0;
+const exitCode = (headResult) => headResult.find((res) => res.error) ? 1 : 0;
 
-const parseOptions = (args) => {
+const parseArguments = (args) => {
   const usage = 'usage: head [-n lines | -c bytes] [file ...]';
   if (args.length === 0) {
     throw { message: usage };
@@ -39,13 +31,15 @@ const parseOptions = (args) => {
 };
 
 const headMain = function (readFile, loggers, ...args) {
-  const { files, options } = parseOptions(args);
-  const format = areMultipleFiles(files) ? formatContent : identityFormatter;
+  const { files, options } = parseArguments(args);
+  const formater = getFormater(files);
   const headResult = files.map(file => headForAFile(file, readFile, options));
-  headResult.forEach((headContent) => print(headContent, loggers, format));
-  return failedCount(headResult);
+  headResult.forEach((headContent) => print(headContent, loggers, formater));
+  return exitCode(headResult);
 };
 
 exports.head = head;
 exports.headMain = headMain;
-exports.formatContent = formatContent;
+exports.headForAFile = headForAFile;
+exports.print = print;
+exports.parseArguments = parseArguments;
