@@ -30,9 +30,12 @@ describe('validateLimit', () => {
   });
 });
 
-describe('validateArgs', () => {
+describe('validateArgs :Head', () => {
   it('should throw error if args length is 0', () => {
     assert.throws(() => validateArgs([]),
       { message: 'usage: head [-n lines | -c bytes] [file ...]' });
+  });
+  it('should not throw error if args length is greater than 0', () => {
+    assert.strictEqual(validateArgs(['hello']), undefined);
   });
 });

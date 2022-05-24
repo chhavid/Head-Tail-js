@@ -20,7 +20,7 @@ const getArgs = function (args) {
   return formattedArgs.filter(arg => arg.length > 0);
 };
 
-const parseArgs = function (parameters) {
+const parseArgs = function (parameters, erroMessage) {
   const options = getOptions(parameters[0]);
   const args = getArgs(parameters);
 
@@ -32,7 +32,7 @@ const parseArgs = function (parameters) {
     options.limit = args[index + 1];
     validateOptions(options, args[index]);
   }
-  throw { message: 'usage: head [-n lines | -c bytes] [file ...]' };
+  throw { message: erroMessage };
 };
 
 exports.parseArgs = parseArgs;

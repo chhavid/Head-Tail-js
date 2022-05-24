@@ -14,7 +14,8 @@ const formatContent = function (content, file, numOfFiles) {
 
 const headMain = function (readFile, { log, error }, ...args) {
   validateArgs(args);
-  const { files, options } = parseArgs(args);
+  const erroMessage = 'usage: head [-n lines | -c bytes] [file ...]';
+  const { files, options } = parseArgs(args, erroMessage);
   let exitCode = 0;
   files.forEach((file) => {
     try {

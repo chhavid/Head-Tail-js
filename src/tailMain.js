@@ -2,8 +2,16 @@ const { formatContent } = require('./headMain.js');
 const { tail } = require('./tailLib.js');
 const { parseArgs } = require('./parse.js');
 
+const validateArgs = function (args) {
+  if (args.length === 0) {
+    throw { message: 'usage: tail [-c # | -n #] [file ...]' };
+  }
+};
+
 const tailMain = function (readFile, { log, error }, ...args) {
-  const { files, options } = parseArgs(args);
+  validateArgs(args);
+  const errorMessage = 'usage: tail [-c # | -n #] [file ...]';
+  const { files, options } = parseArgs(args, errorMessage);
   let exitCode = 0;
   files.forEach((file) => {
     try {
@@ -18,3 +26,4 @@ const tailMain = function (readFile, { log, error }, ...args) {
 };
 
 exports.tailMain = tailMain;
+exports.validateArgs = validateArgs;

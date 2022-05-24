@@ -63,6 +63,12 @@ describe('parseArgs', () => {
         files: ['a.txt'], options: { name: 'line', limit: 2 }
       });
   });
+  it('should parse throw given error if file is not present', () => {
+    assert.throws(() =>
+      parseArgs(['-n2'], 'file not present'), {
+      message: 'file not present'
+    });
+  });
 });
 
 describe('getOptions', () => {

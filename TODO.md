@@ -14,6 +14,7 @@
 
 **DONE:**
 
+- [x] Parameterized the throw message in parse.
 - [x] Implement `tail` for data.
 - [x] Implement tailMain.
 - [x] Add expectation/testCase for tail.

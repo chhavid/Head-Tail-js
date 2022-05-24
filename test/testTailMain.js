@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { tailMain } = require('../src/tailMain.js');
+const { tailMain, validateArgs } = require('../src/tailMain.js');
 const { mockConsole, readFile } = require('./testHeadMain.js');
 
 describe('tailMain', () => {
@@ -43,5 +43,15 @@ describe('tailMain', () => {
       ['tail: content.txt: No such file or directory']);
     assert.strictEqual(tailMain(mockReadFileSync,
       { log: mockedConsole, error: mockedConsole }, 'content.txt'), 1);
+  });
+});
+
+describe('validateArgs :Tail', () => {
+  it('should throw error if args length is 0', () => {
+    assert.throws(() => validateArgs([]),
+      { message: 'usage: tail [-c # | -n #] [file ...]' });
+  });
+  it('should not throw error if args length is greater than 0', () => {
+    assert.strictEqual(validateArgs(['hello']), undefined);
   });
 });
