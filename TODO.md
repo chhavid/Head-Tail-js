@@ -1,5 +1,7 @@
 **TODO:**
 
+- [ ] Add test for intermediate functions.
+- [ ] Fix tail main.
 - [ ] Modify slice function for tail.
 - [ ] Make formatArgs for tail.
 - [ ] Refactor parseArgs.
