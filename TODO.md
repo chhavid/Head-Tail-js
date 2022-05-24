@@ -1,7 +1,7 @@
 **TODO:**
 
-- [ ] Implement tail.js.
-- [ ] Take file from command line for tail.
+- [ ] Modify slice function for tail.
+- [ ] Make formatArgs for tail.
 - [ ] Refactor parseArgs.
 - [ ] Parse and validate args for tail.
 - [ ] Add validations for tail.
@@ -14,6 +14,8 @@
 
 **DONE:**
 
+- [x] Take file from command line for tail.
+- [x] Implement tail.js.
 - [x] Parameterized the throw message in parse.
 - [x] Implement `tail` for data.
 - [x] Implement tailMain.
