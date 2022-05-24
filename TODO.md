@@ -1,16 +1,22 @@
 **TODO:**
 
-- [ ] Read how tail works.
-- [ ] Make `tailLib.js`.
-- [ ] Make `testTailLib.js`.
 - [ ] Refactor parseArgs.
-- [ ] Implement `tail`.
+- [ ] Implement `tail` for data.
+- [ ] Take file from command line for tail.
+- [ ] Parse and validate args for tail.
 
 **Consider:**
-
+ 
+ - [ ] `0` is valid option argument in tail.
+ - [ ] `+num` is also a valid option argument in tail.
+ - [ ] `-n +num` is also a valid option argument in tail.
 
 **DONE:**
 
+- [x] Add expectation/testCase for tail.
+- [x] Make `tailLib.js`.
+- [x] Make `testTailLib.js`.
+- [x] Read how tail works.
 - [x] Set contract for `tail`.
 - [x] Make mock for console of log and error.
 - [x] Should give console error of file is invalid.

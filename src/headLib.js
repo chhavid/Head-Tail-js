@@ -17,3 +17,5 @@ const getLines = function (content, count) {
 
 exports.getLines = getLines;
 exports.sliceUpto = sliceUpto;
+exports.splitContent = splitContent;
+exports.joinLines = joinLines;

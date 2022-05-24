@@ -3,29 +3,29 @@ const { head, headMain } = require('../src/headMain.js');
 
 describe('head', () => {
   it('should give the content of single line', () => {
-    assert.strictEqual(head('hello', { name: 'count', limit: 1 }), 'hello');
-    assert.strictEqual(head('bye', { name: 'count', limit: 1 }), 'bye');
+    assert.strictEqual(head('hello', { name: 'line', limit: 1 }), 'hello');
+    assert.strictEqual(head('bye', { name: 'line', limit: 1 }), 'bye');
   });
 
   it('should give the content with 2 lines', () => {
     assert.strictEqual(head('hello\nworld',
-      { name: 'count', limit: 2 }), 'hello\nworld');
+      { name: 'line', limit: 2 }), 'hello\nworld');
     assert.strictEqual(head('good\nbye',
-      { name: 'count', limit: 2 }), 'good\nbye');
+      { name: 'line', limit: 2 }), 'good\nbye');
   });
   it('should give the content upto 10 lines', () => {
-    assert.strictEqual(head('how\nare\nyou\n?', { name: 'count', limit: 4 }),
+    assert.strictEqual(head('how\nare\nyou\n?', { name: 'line', limit: 4 }),
       'how\nare\nyou\n?');
   });
   it('should give only first 10 lines for content more than 10 lines',
     () => {
       assert.strictEqual(head('a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl',
-        { name: 'count', limit: 10 }), 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj');
+        { name: 'line', limit: 10 }), 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj');
     });
   it('should give lines upto specified number', () => {
-    assert.strictEqual(head('aa\nb\nhello', { name: 'count', limit: 2 }),
+    assert.strictEqual(head('aa\nb\nhello', { name: 'line', limit: 2 }),
       'aa\nb');
-    assert.strictEqual(head('aa\nb\nhello', { name: 'count', limit: 1 }),
+    assert.strictEqual(head('aa\nb\nhello', { name: 'line', limit: 1 }),
       'aa');
   });
   it('should give lines upto specified bytes', () => {

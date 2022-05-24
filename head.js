@@ -6,7 +6,6 @@ const { headMain } = require('./src/headMain.js');
 
 const main = () => {
   const args = process.argv.slice(2);
-  // const console = { log: console.log, error: console.error };
   try {
     const exitCode = headMain(fs.readFileSync, console, ...args);
     exit(exitCode);
