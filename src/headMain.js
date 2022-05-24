@@ -30,3 +30,4 @@ const headMain = function (readFile, { log, error }, ...args) {
 
 exports.head = head;
 exports.headMain = headMain;
+exports.formatContent = formatContent;

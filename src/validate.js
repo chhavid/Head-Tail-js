@@ -22,12 +22,14 @@ const validateOptions = function (options, newOption) {
   const keys = { '-n': 'line', '-c': 'byte' };
   if (isFinite(newOption[1])) {
     return '';
-  } if (!isOptionValid(newOption, keys)) {
+  }
+  if (!isOptionValid(newOption, keys)) {
     throw {
       message: `head: invalid option -- ${newOption.slice(1)}\n` +
         'usage: head [-n lines | -c bytes] [file ...]'
     };
-  } if (isCombined(options.name, newOption, keys)) {
+  }
+  if (isCombined(options.name, newOption, keys)) {
     throw { message: 'head: can\'t combine line and byte counts' };
   }
   validateLimit(options);

@@ -1,9 +1,10 @@
 **TODO:**
 
-- [ ] Refactor parseArgs.
-- [ ] Implement `tail` for data.
+- [ ] Implement tail.js.
 - [ ] Take file from command line for tail.
+- [ ] Refactor parseArgs.
 - [ ] Parse and validate args for tail.
+- [ ] Add validations for tail.
 
 **Consider:**
  
@@ -13,6 +14,8 @@
 
 **DONE:**
 
+- [x] Implement `tail` for data.
+- [x] Implement tailMain.
 - [x] Add expectation/testCase for tail.
 - [x] Make `tailLib.js`.
 - [x] Make `testTailLib.js`.

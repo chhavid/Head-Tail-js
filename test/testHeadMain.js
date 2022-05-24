@@ -98,3 +98,6 @@ describe('headMain', () => {
       { log: mockedConsole, error: mockedConsole }, 'content.txt'), 1);
   });
 });
+
+exports.mockConsole = mockConsole;
+exports.readFile = readFile;
