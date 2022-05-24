@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { headMain, parseArguments, print, headForAFile } =
+const { headMain, print, headAFile } =
   require('../src/headMain.js');
 
 const readFile = (mockFiles, expEncoding) => {
@@ -67,20 +67,6 @@ describe('headMain', () => {
   });
 });
 
-describe('parseArguments', () => {
-  it('should throw error if args are not present', () => {
-    assert.throws(() => parseArguments([]),
-      {
-        message: 'usage: head [-n lines | -c bytes] [file ...]'
-      });
-  });
-  it('should parse the arguments with filename and options.', () => {
-    assert.deepStrictEqual(parseArguments(['-n', '5', 'a.txt']), {
-      files: ['a.txt'], options: { name: 'line', limit: 5 }
-    });
-  });
-});
-
 describe('print', () => {
   it('should print the output', () => {
     const mockedConsole = mockConsole(['hello']);
@@ -90,19 +76,19 @@ describe('print', () => {
   });
 });
 
-describe('headForAFile', () => {
+describe('headAFile', () => {
   it('should give result of head of file', () => {
     const mockReadFileSync = readFile([{
       name: 'a.txt',
       content: 'hello'
     }], 'utf8');
-    assert.deepStrictEqual(headForAFile('a.txt', mockReadFileSync, {
+    assert.deepStrictEqual(headAFile('a.txt', mockReadFileSync, {
       name: 'lines', limit: 1
     }), { content: 'hello', file: 'a.txt' });
   });
   it('should have error in result if file not valid', () => {
     const mockReadFileSync = readFile([{}], 'utf8');
-    assert.deepStrictEqual(headForAFile('a.txt', mockReadFileSync, {
+    assert.deepStrictEqual(headAFile('a.txt', mockReadFileSync, {
       name: 'lines', limit: 1
     }), {
       error: 'head: a.txt: No such file or directory',

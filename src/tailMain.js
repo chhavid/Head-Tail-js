@@ -1,30 +1,26 @@
 const { getFormater } = require('./utilityFns.js');
 const { tail } = require('./tailLib.js');
 const { parseArgs } = require('./parse.js');
+const { print, exitCode } = require('./headMain.js');
 
-const validateArgs = (args) => {
-  if (args.length === 0) {
-    throw { message: 'usage: tail [-c # | -n #] [file ...]' };
+const tailAFile = (file, readFile, options) => {
+  const result = { file };
+  try {
+    result.content = tail(readFile(file, 'utf8'), options);
+  } catch (err) {
+    result.error = 'tail: ' + file + ': No such file or directory';
   }
+  return result;
 };
 
-const tailMain = function (readFile, { log, error }, ...args) {
-  validateArgs(args);
-  const errorMessage = 'usage: tail [-c # | -n #] [file ...]';
-  const { files, options } = parseArgs(args, errorMessage);
-  let exitCode = 0;
-  files.forEach((file) => {
-    try {
-      const content = tail(readFile(file, 'utf8'), options);
-      const formatter = getFormater(files);
-      log(formatter(content, file, files.length));
-    } catch (err) {
-      exitCode = 1;
-      error('tail: ' + file + ': No such file or directory');
-    }
-  });
-  return exitCode;
+const tailMain = function (readFile, consoles, ...args) {
+  const usage = 'usage: tail [-c # | -n #] [file ...]';
+  const { files, options } = parseArgs(args, usage);
+  const formater = getFormater(files);
+  const tailResults = files.map(file => tailAFile(file, readFile, options));
+  tailResults.forEach((result) => print(result, consoles, formater));
+  return exitCode(tailResults);
 };
 
 exports.tailMain = tailMain;
-exports.validateArgs = validateArgs;
+exports.tailAFile = tailAFile;

@@ -1,6 +1,5 @@
 **TODO:**
 
-- [ ] Fix tail main.
 - [ ] Modify slice function for tail.
 - [ ] Make formatArgs for tail.
 - [ ] Refactor parseArgs.
@@ -15,6 +14,7 @@
 
 **DONE:**
 
+- [x] Fix tail main.
 - [x] Add test for intermediate functions.
 - [x] Make arrow functions.
 - [x] Take file from command line for tail.

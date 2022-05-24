@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { tailMain, validateArgs } = require('../src/tailMain.js');
+const { tailMain, tailAFile } = require('../src/tailMain.js');
 const { mockConsole, readFile } = require('./testHeadMain.js');
 
 describe('tailMain', () => {
@@ -46,12 +46,23 @@ describe('tailMain', () => {
   });
 });
 
-describe('validateArgs :Tail', () => {
-  it('should throw error if args length is 0', () => {
-    assert.throws(() => validateArgs([]),
-      { message: 'usage: tail [-c # | -n #] [file ...]' });
+describe('TailAFile', () => {
+  it('should give result of head of file', () => {
+    const mockReadFileSync = readFile([{
+      name: 'a.txt',
+      content: 'hello'
+    }], 'utf8');
+    assert.deepStrictEqual(tailAFile('a.txt', mockReadFileSync, {
+      name: 'lines', limit: 1
+    }), { content: 'hello', file: 'a.txt' });
   });
-  it('should not throw error if args length is greater than 0', () => {
-    assert.strictEqual(validateArgs(['hello']), undefined);
+  it('should have error in result if file not valid', () => {
+    const mockReadFileSync = readFile([{}], 'utf8');
+    assert.deepStrictEqual(tailAFile('a.txt', mockReadFileSync, {
+      name: 'lines', limit: 1
+    }), {
+      error: 'tail: a.txt: No such file or directory',
+      file: 'a.txt'
+    });
   });
 });

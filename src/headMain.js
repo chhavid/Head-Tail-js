@@ -2,7 +2,7 @@ const { parseArgs } = require('./parse.js');
 const { head } = require('./headLib.js');
 const { getFormater } = require('./utilityFns');
 
-const headForAFile = (file, readFile, options) => {
+const headAFile = (file, readFile, options) => {
   const result = { file };
   try {
     result.content = head(readFile(file, 'utf8'), options);
@@ -20,26 +20,19 @@ const print = (headContent, loggers, formater) => {
   loggers.log(formater(headContent.content, headContent.file));
 };
 
-const exitCode = (headResult) => headResult.find((res) => res.error) ? 1 : 0;
-
-const parseArguments = (args) => {
-  const usage = 'usage: head [-n lines | -c bytes] [file ...]';
-  if (args.length === 0) {
-    throw { message: usage };
-  }
-  return parseArgs(args, usage);
-};
+const exitCode = (headResults) => headResults.find((res) => res.error) ? 1 : 0;
 
 const headMain = function (readFile, loggers, ...args) {
-  const { files, options } = parseArguments(args);
+  const usage = 'usage: head [-n lines | -c bytes] [file ...]';
+  const { files, options } = parseArgs(args, usage);
   const formater = getFormater(files);
-  const headResult = files.map(file => headForAFile(file, readFile, options));
-  headResult.forEach((headContent) => print(headContent, loggers, formater));
-  return exitCode(headResult);
+  const headResults = files.map(file => headAFile(file, readFile, options));
+  headResults.forEach((result) => print(result, loggers, formater));
+  return exitCode(headResults);
 };
 
 exports.head = head;
 exports.headMain = headMain;
-exports.headForAFile = headForAFile;
+exports.headAFile = headAFile;
 exports.print = print;
-exports.parseArguments = parseArguments;
+exports.exitCode = exitCode;

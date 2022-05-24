@@ -1,4 +1,4 @@
-const { validateOptions, isOption } = require('./validate.js');
+const { validateOptions, isOption, validateArgs } = require('./validate.js');
 
 const getOptions = function (arg) {
   const options = { name: 'line', limit: 10 };
@@ -21,6 +21,7 @@ const getArgs = (args) => {
 };
 
 const parseArgs = function (parameters, erroMessage) {
+  validateArgs(parameters);
   const options = getOptions(parameters[0]);
   const args = getArgs(parameters);
 
