@@ -1,22 +1,19 @@
-const validateArgs = function (args) {
+const validateArgs = (args) => {
   if (args.length === 0) {
     throw { message: 'usage: head [-n lines | -c bytes] [file ...]' };
   }
 };
 
-const validateLimit = function ({ name, limit }) {
+const validateLimit = ({ name, limit }) => {
   if (!+limit) {
     throw { message: `head: illegal ${name} count -- ${limit}` };
   }
 };
 
-const isOptionValid = function (option, keys) {
-  return keys[option.slice(0, 2)];
-};
+const isOptionValid = (option, keys) => keys[option.slice(0, 2)];
 
-const isCombined = function (prevOption, newOption, keys) {
-  return prevOption !== keys[newOption.slice(0, 2)];
-};
+const isCombined = (prevOption, newOption, keys) =>
+  prevOption !== keys[newOption.slice(0, 2)];
 
 const validateOptions = function (options, newOption) {
   const keys = { '-n': 'line', '-c': 'byte' };
@@ -36,9 +33,7 @@ const validateOptions = function (options, newOption) {
   options.limit = +options.limit;
 };
 
-const isOption = function (arg) {
-  return arg.startsWith('-');
-};
+const isOption = (arg) => arg.startsWith('-');
 
 exports.validateOptions = validateOptions;
 exports.validateLimit = validateLimit;

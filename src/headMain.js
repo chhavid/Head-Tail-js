@@ -2,12 +2,10 @@ const { parseArgs } = require('./parse.js');
 const { getLines, sliceUpto } = require('./headLib.js');
 const { validateArgs } = require('./validate.js');
 
-const head = function (content, { name, limit }) {
-  return name === 'byte'
-    ? sliceUpto(content, limit) : getLines(content, limit);
-};
+const head = (content, { name, limit }) =>
+  name === 'byte' ? sliceUpto(content, limit) : getLines(content, limit);
 
-const formatContent = function (content, file, numOfFiles) {
+const formatContent = (content, file, numOfFiles) => {
   const heading = '==> ' + file + ' <==' + '\n';
   return numOfFiles > 1 ? heading + content + '\n' : content;
 };

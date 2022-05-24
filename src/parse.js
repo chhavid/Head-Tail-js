@@ -15,7 +15,7 @@ const formatArgs = function (arg) {
   return arg.startsWith('-') ? [arg.slice(0, 2), arg.slice(2)] : arg;
 };
 
-const getArgs = function (args) {
+const getArgs = (args) => {
   const formattedArgs = args.flatMap(formatArgs);
   return formattedArgs.filter(arg => arg.length > 0);
 };

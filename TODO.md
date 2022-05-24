@@ -14,6 +14,7 @@
 
 **DONE:**
 
+- [x] Make arrow functions.
 - [x] Take file from command line for tail.
 - [x] Implement tail.js.
 - [x] Parameterized the throw message in parse.

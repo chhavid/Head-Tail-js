@@ -2,7 +2,7 @@ const { formatContent } = require('./headMain.js');
 const { tail } = require('./tailLib.js');
 const { parseArgs } = require('./parse.js');
 
-const validateArgs = function (args) {
+const validateArgs = (args) => {
   if (args.length === 0) {
     throw { message: 'usage: tail [-c # | -n #] [file ...]' };
   }

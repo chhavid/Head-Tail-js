@@ -5,9 +5,7 @@ const splitContent = (content) => content.split(NEWLINE);
 
 const joinLines = (lines) => lines.join(NEWLINE);
 
-const sliceUpto = function (content, count) {
-  return content.slice(startIndex, count);
-};
+const sliceUpto = (content, count) => content.slice(startIndex, count);
 
 const getLines = function (content, count) {
   const lines = splitContent(content);
