@@ -22,7 +22,7 @@ const print = (headContent, loggers, formater) => {
 
 const exitCode = (headResults) => headResults.find((res) => res.error) ? 1 : 0;
 
-const headMain = function (readFile, loggers, ...args) {
+const headMain = function (readFile, loggers, args) {
   const usage = 'usage: head [-n lines | -c bytes] [file ...]';
   const { files, options } = parseArgs(args, usage);
   const formater = getFormater(files);

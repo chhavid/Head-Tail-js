@@ -4,6 +4,12 @@ const validateArgs = (args) => {
   }
 };
 
+const validateLimit = ({ name, limit }) => {
+  if (!isFinite(limit)) {
+    throw { message: `head: illegal ${name} count -- ${limit}` };
+  }
+};
+
 const isOptionValid = (option, keys) => keys[option.slice(0, 2)];
 
 const validateOptions = function (newOption) {
@@ -19,8 +25,6 @@ const validateOptions = function (newOption) {
   }
 };
 
-const isOption = (arg) => arg.startsWith('-');
-
 exports.validateOptions = validateOptions;
-exports.isOption = isOption;
 exports.validateArgs = validateArgs;
+exports.validateLimit = validateLimit;

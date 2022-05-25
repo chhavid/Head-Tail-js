@@ -32,7 +32,7 @@ describe('headMain', () => {
     const mockedConsole = mockConsole(['hello']);
     assert.strictEqual(headMain(mockReadFileSync,
       { log: mockedConsole, error: mockedConsole },
-      '-n', '1', 'content.txt'), 0);
+      ['-n', '1', 'content.txt']), 0);
   });
 
   it('should give line of two files', () => {
@@ -43,8 +43,8 @@ describe('headMain', () => {
     const mockedConsole = mockConsole(['==> content.txt <==\nhello\n',
       '==> a.txt <==\nbye\n']);
     assert.strictEqual(headMain(mockReadFileSync,
-      { log: mockedConsole, error: mockedConsole }, 'content.txt',
-      'a.txt'), 0);
+      { log: mockedConsole, error: mockedConsole },
+      ['content.txt', 'a.txt']), 0);
   });
 
   it('should give line of multiple files', () => {
@@ -55,15 +55,15 @@ describe('headMain', () => {
     const mockedConsole = mockConsole(['==> content.txt <==\nhello\n',
       '==> a.txt <==\nbye\n', '==> b.txt <==\nhey\n']);
     assert.strictEqual(headMain(mockReadFileSync,
-      { log: mockedConsole, error: mockedConsole }, 'content.txt',
-      'a.txt', 'b.txt'), 0);
+      { log: mockedConsole, error: mockedConsole },
+      ['content.txt', 'a.txt', 'b.txt']), 0);
   });
   it('should give error if file is invalid', () => {
     const mockReadFileSync = readFile([], 'utf8');
     const mockedConsole = mockConsole(
       ['head: content.txt: No such file or directory']);
     assert.strictEqual(headMain(mockReadFileSync,
-      { log: mockedConsole, error: mockedConsole }, 'content.txt'), 1);
+      { log: mockedConsole, error: mockedConsole }, ['content.txt']), 1);
   });
 });
 

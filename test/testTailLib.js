@@ -28,10 +28,10 @@ describe('tail', () => {
 
 describe('getLines', () => {
   it('should get single line.', () => {
-    return assert.strictEqual(getLines('a', 1), 'a');
+    assert.strictEqual(getLines('a', 1), 'a');
   });
   it('should get 2 lines.', () => {
-    return assert.strictEqual(getLines('a\nb\nc', 2), 'b\nc');
+    assert.strictEqual(getLines('a\nb\nc', 2), 'b\nc');
   });
 });
 

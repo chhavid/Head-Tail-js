@@ -14,7 +14,7 @@ const tailAFile = (file, readFile, options) => {
   return result;
 };
 
-const tailMain = function (readFile, consoles, ...args) {
+const tailMain = function (readFile, consoles, args) {
   validateArgs(args);
   const usage = 'usage: tail [-c # | -n #] [file ...]';
   const { files, options } = parseArgs(args, usage);
