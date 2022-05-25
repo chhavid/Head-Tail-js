@@ -1,6 +1,6 @@
 const { getFormater } = require('./utilityFns.js');
 const { tail } = require('./tailLib.js');
-const { parseArgs } = require('./parse.js');
+const { parseArgs } = require('./parseTail.js');
 const { print, exitCode } = require('./headMain.js');
 
 const tailAFile = (file, readFile, options) => {

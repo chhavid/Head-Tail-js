@@ -1,10 +1,11 @@
 **TODO:**
 
 - [ ] Modify slice function for tail.
-- [ ] Make formatArgs for tail.
 - [ ] Refactor parseArgs.
 - [ ] Parse and validate args for tail.
 - [ ] Add validations for tail.
+- [ ] Add -q option in tail.
+- [ ] Add -r option in tail.
 
 **Consider:**
  
@@ -14,6 +15,7 @@
 
 **DONE:**
 
+- [x] Make formatArgs for tail.
 - [x] Fix tail main.
 - [x] Add test for intermediate functions.
 - [x] Make arrow functions.

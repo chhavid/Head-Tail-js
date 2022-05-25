@@ -31,7 +31,6 @@ const headMain = function (readFile, loggers, ...args) {
   return exitCode(headResults);
 };
 
-exports.head = head;
 exports.headMain = headMain;
 exports.headAFile = headAFile;
 exports.print = print;
