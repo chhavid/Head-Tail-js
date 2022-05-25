@@ -9,12 +9,12 @@
 
 **Consider:**
  
- - [ ] `0` is valid option argument in tail.
- - [ ] `+num` is also a valid option argument in tail.
- - [ ] `-n +num` is also a valid option argument in tail.
+- [ ] `0` is valid option argument in tail.
 
 **DONE:**
 
+- [x] `+num` is also a valid option argument in tail.
+- [x] `-n +num` is also a valid option argument in tail.
 - [x] Make formatArgs for tail.
 - [x] Fix tail main.
 - [x] Add test for intermediate functions.
