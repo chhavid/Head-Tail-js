@@ -1,20 +1,17 @@
 const { validateOptions, isOption, validateArgs } = require('./validate.js');
 const { getOptions } = require('./parse');
 
-const getValue = function (number) {
+const getValue = (number) => {
   if (number.startsWith('+')) {
     return '-' + (Math.abs(number) - 1);
   }
   return number;
 };
 
-const isArgComplete = function (arg) {
-  return /^[-+].*\d/.test(arg) || !/^[-+]/.test(arg);
-};
+const isArgComplete = (arg) => /^[-+].*\d/.test(arg) || !/^[-+]/.test(arg);
 
-const parseFiniteOption = function (arg) {
-  return arg.startsWith('+') ? ['-n', getValue(arg)] : ['-n', arg.slice(1)];
-};
+const parseFiniteOption = (arg) =>
+  arg.startsWith('+') ? ['-n', getValue(arg)] : ['-n', arg.slice(1)];
 
 const splitArg = function (arg) {
   if (!/^[-+]/.test(arg)) {
