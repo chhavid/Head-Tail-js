@@ -2,6 +2,7 @@ const { getFormater } = require('./utilityFns.js');
 const { tail } = require('./tailLib.js');
 const { parseArgs } = require('./parseTail.js');
 const { print, exitCode } = require('./headMain.js');
+const { validateArgs } = require('./validateTailArgs.js');
 
 const tailAFile = (file, readFile, options) => {
   const result = { file };
@@ -14,6 +15,7 @@ const tailAFile = (file, readFile, options) => {
 };
 
 const tailMain = function (readFile, consoles, ...args) {
+  validateArgs(args);
   const usage = 'usage: tail [-c # | -n #] [file ...]';
   const { files, options } = parseArgs(args, usage);
   const formater = getFormater(files);

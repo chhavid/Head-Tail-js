@@ -1,6 +1,5 @@
 **TODO:**
 
-- [ ] Modify slice function for tail.
 - [ ] Refactor parseArgs.
 - [ ] Parse and validate args for tail.
 - [ ] Add validations for tail.
@@ -13,6 +12,7 @@
 
 **DONE:**
 
+- [x] Modify slice function for tail.
 - [x] `+num` is also a valid option argument in tail.
 - [x] `-n +num` is also a valid option argument in tail.
 - [x] Make formatArgs for tail.

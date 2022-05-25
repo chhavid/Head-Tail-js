@@ -1,3 +1,5 @@
+const { validateOptions } = require('./validateTailArgs.js');
+
 const isOption = function (arg) {
   return /^[-+]/.test(arg);
 };
@@ -22,12 +24,14 @@ const getOptions = function (option, value, options) {
   options.name = keys[option];
   options.limit = Math.abs(value);
   options.offsetBottom = value.startsWith('+');
+
 };
 
 const parseArgs = function (args) {
   const options = { name: 'line', limit: 10, offsetBottom: false };
   let index = 0;
   while (isOption(args[index])) {
+    validateOptions(args[index]);
     if (isOptionComplete(args[index])) {
       parseOptions(args[index], options);
       index++;
@@ -36,8 +40,7 @@ const parseArgs = function (args) {
       index += 2;
     }
   }
-  const files = args.slice(index);
-  return { files, options };
+  return { files: args.slice(index), options };
 };
 
 exports.parseArgs = parseArgs;
