@@ -12,21 +12,21 @@ const validateLimit = ({ name, limit }) => {
 
 const isOptionValid = (option, keys) => keys[option.slice(0, 2)];
 
-const isCombined = (prevOption, newOption, keys) =>
-  prevOption !== keys[newOption.slice(0, 2)];
+const isCombined = (prevOption, currentOption, keys) =>
+  prevOption !== keys[currentOption.slice(0, 2)];
 
-const validateOptions = function (options, newOption) {
+const validateOptions = function (options, currentOption) {
   const keys = { '-n': 'line', '-c': 'byte' };
-  if (isFinite(newOption[1])) {
+  if (isFinite(currentOption[1])) {
     return '';
   }
-  if (!isOptionValid(newOption, keys)) {
+  if (!isOptionValid(currentOption, keys)) {
     throw {
-      message: `head: invalid option -- ${newOption.slice(1)}\n` +
+      message: `head: invalid option -- ${currentOption.slice(1)}\n` +
         'usage: head [-n lines | -c bytes] [file ...]'
     };
   }
-  if (isCombined(options.name, newOption, keys)) {
+  if (isCombined(options.name, currentOption, keys)) {
     throw { message: 'head: can\'t combine line and byte counts' };
   }
   validateLimit(options);

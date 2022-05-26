@@ -1,6 +1,6 @@
 const assert = require('assert');
 const { validateOptions, validateLimit, validateArgs } =
-  require('../src/validate.js');
+  require('../src/validators.js');
 
 describe('validateOptions', () => {
   it('should throw error if invalid option is passed', () => {
@@ -24,9 +24,17 @@ describe('validateOptions', () => {
 });
 
 describe('validateLimit', () => {
-  it('should throw error if value is 0', () => {
+  it('should throw error if limit is 0', () => {
     assert.throws(() => validateLimit({ name: 'line', limit: 0 }),
       { message: 'head: illegal line count -- 0' });
+  });
+  it('should throw error if limit is non-numeric', () => {
+    assert.throws(() => validateLimit({ name: 'line', limit: 'e' }),
+      { message: 'head: illegal line count -- e' });
+  });
+  it('should not throw error if limit is valid', () => {
+    assert.strictEqual(validateLimit({ name: 'line', limit: '5' }),
+      undefined);
   });
 });
 

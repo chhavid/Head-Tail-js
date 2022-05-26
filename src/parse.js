@@ -1,4 +1,4 @@
-const { validateOptions, isOption, validateArgs } = require('./validate.js');
+const { validateOptions, isOption, validateArgs } = require('./validators.js');
 
 const getOptions = function (arg) {
   const options = { name: 'line', limit: 10 };
@@ -15,14 +15,14 @@ const formatArgs = function (arg) {
   return arg.startsWith('-') ? [arg.slice(0, 2), arg.slice(2)] : arg;
 };
 
-const getArgs = (args) => {
+const splitArgs = (args) => {
   const formattedArgs = args.flatMap(formatArgs);
   return formattedArgs.filter(arg => arg.length > 0);
 };
 
 const parseArgs = function (parameters, erroMessage) {
   validateArgs(parameters);
-  const args = getArgs(parameters);
+  const args = splitArgs(parameters);
   const options = getOptions(parameters[0]);
 
   for (let index = 0; index < args.length; index += 2) {
