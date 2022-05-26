@@ -50,7 +50,7 @@ describe('TailAFile', () => {
   it('should give result of head of file', () => {
     const mockReadFileSync = readFile([{
       name: 'a.txt',
-      content: 'hello'
+      content: 'bye\nhello'
     }], 'utf8');
     assert.deepStrictEqual(tailAFile('a.txt', mockReadFileSync, {
       name: 'lines', limit: 1

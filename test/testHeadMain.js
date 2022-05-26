@@ -74,13 +74,19 @@ describe('print', () => {
       log: mockedConsole, error: mockedConsole
     }, mockFormatter), undefined);
   });
+  it('should print the error', () => {
+    const mockedConsole = mockConsole(['Can not read file']);
+    assert.strictEqual(print({ error: 'Can not read file' }, {
+      log: mockedConsole, error: mockedConsole
+    }, mockFormatter), undefined);
+  });
 });
 
 describe('headAFile', () => {
   it('should give result of head of file', () => {
     const mockReadFileSync = readFile([{
       name: 'a.txt',
-      content: 'hello'
+      content: 'hello\nbye'
     }], 'utf8');
     assert.deepStrictEqual(headAFile('a.txt', mockReadFileSync, {
       name: 'lines', limit: 1

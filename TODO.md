@@ -42,6 +42,8 @@
 
 - **TODO:**
 
+- [ ] Refactor validateOptions. 
+
 - **Consider:**
 
 - **DONE:**

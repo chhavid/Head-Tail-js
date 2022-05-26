@@ -20,7 +20,7 @@ const print = (headContent, loggers, formater) => {
   loggers.log(formater(headContent.content, headContent.file));
 };
 
-const exitCode = (headResults) => headResults.find((res) => res.error) ? 1 : 0;
+const exitCode = (results) => results.find((res) => res.error) ? 1 : 0;
 
 const headMain = function (readFile, loggers, args) {
   const usage = 'usage: head [-n lines | -c bytes] [file ...]';

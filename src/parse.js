@@ -22,8 +22,8 @@ const getArgs = (args) => {
 
 const parseArgs = function (parameters, erroMessage) {
   validateArgs(parameters);
-  const options = getOptions(parameters[0]);
   const args = getArgs(parameters);
+  const options = getOptions(parameters[0]);
 
   for (let index = 0; index < args.length; index += 2) {
     if (!isOption(args[index])) {

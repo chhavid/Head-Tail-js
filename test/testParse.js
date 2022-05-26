@@ -8,7 +8,7 @@ describe('parseArgs', () => {
     });
   });
 
-  it('should parse filename with count.', () => {
+  it('should parse filename with lines.', () => {
     assert.deepStrictEqual(parseArgs(['-n', '5', 'a.txt']), {
       files: ['a.txt'], options: { name: 'line', limit: 5 }
     });
