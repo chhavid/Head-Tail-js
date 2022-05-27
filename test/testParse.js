@@ -63,10 +63,28 @@ describe('parseArgs', () => {
         files: ['a.txt'], options: { name: 'line', limit: 2 }
       });
   });
-  it('should parse throw given error if file is not present', () => {
+  it('should throw given error if file is not present', () => {
     assert.throws(() =>
       parseArgs(['-n2'], 'file not present'), {
       message: 'file not present'
+    });
+  });
+});
+
+describe('parseArgs', () => {
+  it('should parse only filename.', () => {
+    assert.deepStrictEqual(parseArgs(['a.txt']), {
+      files: ['a.txt'], options: { name: 'line', limit: 10 }
+    });
+  });
+  it('should parse filename with lines.', () => {
+    assert.deepStrictEqual(parseArgs(['-n', '5', 'a.txt']), {
+      files: ['a.txt'], options: { name: 'line', limit: 5 }
+    });
+  });
+  it('should parse filename with bytes.', () => {
+    assert.deepStrictEqual(parseArgs(['-c', '10', 'a.txt']), {
+      files: ['a.txt'], options: { name: 'byte', limit: 10 }
     });
   });
 });

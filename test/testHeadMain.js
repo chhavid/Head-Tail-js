@@ -5,8 +5,8 @@ const { headMain, print, headAFile } =
 const readFile = (mockFiles, expEncoding) => {
   let index = 0;
   return function (files, encoding) {
-    assert.equal(mockFiles[index].name, files);
-    assert.equal(encoding, expEncoding);
+    assert.strictEqual(mockFiles[index].name, files);
+    assert.strictEqual(encoding, expEncoding);
     const fileContent = mockFiles[index].content;
     index++;
     return fileContent;
@@ -15,10 +15,13 @@ const readFile = (mockFiles, expEncoding) => {
 
 const mockConsole = (expContent) => {
   let index = 0;
-  return function (content) {
-    assert.equal(expContent[index], content);
+  const display = (content) => {
+    assert.strictEqual(expContent[index], content);
     index++;
+    display.count++;
   };
+  display.count = 0;
+  return display;
 };
 
 const mockFormatter = (content) => content;
@@ -73,12 +76,15 @@ describe('print', () => {
     assert.strictEqual(print({ content: 'hello' }, {
       log: mockedConsole, error: mockedConsole
     }, mockFormatter), undefined);
+    assert.strictEqual(mockedConsole.count, 1);
   });
+
   it('should print the error', () => {
     const mockedConsole = mockConsole(['Can not read file']);
     assert.strictEqual(print({ error: 'Can not read file' }, {
       log: mockedConsole, error: mockedConsole
     }, mockFormatter), undefined);
+    assert.strictEqual(mockedConsole.count, 1);
   });
 });
 

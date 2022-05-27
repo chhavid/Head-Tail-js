@@ -20,22 +20,29 @@ const splitArgs = (args) => {
   return formattedArgs.filter(arg => arg.length > 0);
 };
 
-const parseArgs = function (parameters, erroMessage) {
-  validateArgs(parameters);
-  const args = splitArgs(parameters);
-  const options = getOptions(parameters[0]);
-
-  for (let index = 0; index < args.length; index += 2) {
-    if (!isOption(args[index])) {
-      const files = args.slice(index);
-      return { files, options };
-    }
+const parse = function (args) {
+  const options = getOptions(args[0]);
+  let index = 0;
+  while (isOption(args[index])) {
     options.limit = args[index + 1];
     validateOptions(options, args[index]);
+    index += 2;
   }
-  throw { message: erroMessage };
+  const files = args.slice(index);
+  return { files, options };
 };
 
+const parseArgs = function (parameters, erroMessage) {
+  validateArgs(parameters, erroMessage);
+  const args = splitArgs(parameters);
+  const { files, options } = parse(args);
+  if (files.length === 0) {
+    throw { message: erroMessage };
+  }
+  return { files, options };
+};
+
+exports.parse = parse;
 exports.parseArgs = parseArgs;
 exports.getOptions = getOptions;
 exports.formatArgs = formatArgs;

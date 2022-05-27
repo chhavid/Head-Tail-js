@@ -6,10 +6,10 @@ const main = () => {
   const args = process.argv.slice(2);
   try {
     const exitCode = headMain(fs.readFileSync, console, args);
-    process.exit(exitCode);
+    process.exitCode = exitCode;
   } catch (error) {
     console.error(error.message);
-    process.exit(1);
+    process.exitCode = 1;
   }
 };
 

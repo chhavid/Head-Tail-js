@@ -1,6 +1,6 @@
-const validateArgs = (args) => {
+const validateArgs = (args, message) => {
   if (args.length === 0) {
-    throw { message: 'usage: head [-n lines | -c bytes] [file ...]' };
+    throw { message };
   }
 };
 
@@ -33,7 +33,7 @@ const validateOptions = function (options, currentOption) {
   options.limit = +options.limit;
 };
 
-const isOption = (arg) => arg.startsWith('-');
+const isOption = (arg) => /^-/.test(arg);
 
 exports.validateOptions = validateOptions;
 exports.validateLimit = validateLimit;
