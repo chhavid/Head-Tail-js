@@ -1,12 +1,5 @@
-const { validateOptions, isOption, validateArgs } = require('./validators.js');
-
-const getOptions = function (arg) {
-  const options = { name: 'line', limit: 10 };
-  if (arg.slice(0, 2) === '-c') {
-    options.name = 'byte';
-  }
-  return options;
-};
+const { validateOptions, isOption, validateFiles, validateCombinations } =
+  require('./validators.js');
 
 const formatArgs = function (arg) {
   if (arg.startsWith('-') && isFinite(arg[1])) {
@@ -20,29 +13,28 @@ const splitArgs = (args) => {
   return formattedArgs.filter(arg => arg.length > 0);
 };
 
-const parse = function (args) {
-  const options = getOptions(args[0]);
+const parse = function (args, flagNames) {
+  const options = { name: 'line', limit: 10 };
   let index = 0;
   while (isOption(args[index])) {
+    options.name = flagNames[args[index]];
     options.limit = args[index + 1];
     validateOptions(options, args[index]);
     index += 2;
   }
   const files = args.slice(index);
+  validateFiles(files);
   return { files, options };
 };
 
-const parseArgs = function (parameters, erroMessage) {
-  validateArgs(parameters, erroMessage);
+const parseArgs = function (parameters) {
+  const flagNames = { '-n': 'line', '-c': 'byte' };
   const args = splitArgs(parameters);
-  const { files, options } = parse(args);
-  if (files.length === 0) {
-    throw { message: erroMessage };
-  }
-  return { files, options };
+
+  validateCombinations(args);
+  return parse(args, flagNames);
 };
 
 exports.parse = parse;
 exports.parseArgs = parseArgs;
-exports.getOptions = getOptions;
 exports.formatArgs = formatArgs;

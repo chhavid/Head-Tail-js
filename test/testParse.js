@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { parseArgs, getOptions, formatArgs } = require('../src/parse.js');
+const { parseArgs, formatArgs } = require('../src/parse.js');
 
 describe('parseArgs', () => {
   it('should parse only filename.', () => {
@@ -64,10 +64,8 @@ describe('parseArgs', () => {
       });
   });
   it('should throw given error if file is not present', () => {
-    assert.throws(() =>
-      parseArgs(['-n2'], 'file not present'), {
-      message: 'file not present'
-    });
+    const message = 'usage: head [-n lines | -c bytes] [file ...]';
+    assert.throws(() => parseArgs(['-n2']), { message });
   });
 });
 
@@ -86,17 +84,6 @@ describe('parseArgs', () => {
     assert.deepStrictEqual(parseArgs(['-c', '10', 'a.txt']), {
       files: ['a.txt'], options: { name: 'byte', limit: 10 }
     });
-  });
-});
-
-describe('getOptions', () => {
-  it('should give default option', () => {
-    assert.deepStrictEqual(getOptions(''),
-      { name: 'line', limit: 10 });
-  });
-  it('should give bytes option ', () => {
-    assert.deepStrictEqual(getOptions('-c'),
-      { name: 'byte', limit: 10 });
   });
 });
 

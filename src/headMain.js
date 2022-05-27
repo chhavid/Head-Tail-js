@@ -23,8 +23,7 @@ const print = (headContent, loggers, formater) => {
 const exitCode = (results) => results.find((res) => res.error) ? 1 : 0;
 
 const headMain = function (readFile, loggers, args) {
-  const usage = 'usage: head [-n lines | -c bytes] [file ...]';
-  const { files, options } = parseArgs(args, usage);
+  const { files, options } = parseArgs(args);
   const formater = getFormater(files);
   const headResults = files.map(file => headAFile(file, readFile, options));
   headResults.forEach((result) => print(result, loggers, formater));

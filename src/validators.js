@@ -1,5 +1,6 @@
-const validateArgs = (args, message) => {
+const validateFiles = (args) => {
   if (args.length === 0) {
+    const message = 'usage: head [-n lines | -c bytes] [file ...]';
     throw { message };
   }
 };
@@ -10,24 +11,23 @@ const validateLimit = ({ name, limit }) => {
   }
 };
 
-const isOptionValid = (option, keys) => keys[option.slice(0, 2)];
+const isOptionValid = (option, flagNames) => {
+  return flagNames[option] || isFinite(option);
+};
 
-const isCombined = (prevOption, currentOption, keys) =>
-  prevOption !== keys[currentOption.slice(0, 2)];
+const validateCombinations = function (args) {
+  if (args.includes('-n') && args.includes('-c')) {
+    throw { message: 'head: can\'t combine line and byte counts' };
+  }
+};
 
 const validateOptions = function (options, currentOption) {
-  const keys = { '-n': 'line', '-c': 'byte' };
-  if (isFinite(currentOption[1])) {
-    return '';
-  }
-  if (!isOptionValid(currentOption, keys)) {
+  const flagNames = { '-n': 'line', '-c': 'byte' };
+  if (!isOptionValid(currentOption, flagNames)) {
     throw {
       message: `head: invalid option -- ${currentOption.slice(1)}\n` +
         'usage: head [-n lines | -c bytes] [file ...]'
     };
-  }
-  if (isCombined(options.name, currentOption, keys)) {
-    throw { message: 'head: can\'t combine line and byte counts' };
   }
   validateLimit(options);
   options.limit = +options.limit;
@@ -38,4 +38,6 @@ const isOption = (arg) => /^-/.test(arg);
 exports.validateOptions = validateOptions;
 exports.validateLimit = validateLimit;
 exports.isOption = isOption;
-exports.validateArgs = validateArgs;
+exports.validateFiles = validateFiles;
+exports.validateCombinations = validateCombinations;
+exports.isOptionValid = isOptionValid;

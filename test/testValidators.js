@@ -1,5 +1,6 @@
 const assert = require('assert');
-const { validateOptions, validateLimit, validateArgs } =
+const { validateOptions, validateLimit, validateFiles,
+  isOption, validateCombinations, isOptionValid } =
   require('../src/validators.js');
 
 describe('validateOptions', () => {
@@ -10,12 +11,9 @@ describe('validateOptions', () => {
           + 'usage: head [-n lines | -c bytes] [file ...]'
       });
   });
-  it('should throw error if both options are passed', () => {
-    assert.throws(() => validateOptions({ name: 'line', limit: 10 }, '-c'),
-      { message: 'head: can\'t combine line and byte counts' });
-  });
   it('should return if option is direct value', () => {
-    assert.strictEqual(validateOptions({ name: 'line', limit: 10 }, '-2'), '');
+    assert.strictEqual(validateOptions({ name: 'line', limit: 10 }, '-2'),
+      undefined);
   });
   it('should return if option is correct and same', () => {
     assert.strictEqual(validateOptions({ name: 'line', limit: 10 }, '-n'),
@@ -38,12 +36,46 @@ describe('validateLimit', () => {
   });
 });
 
-describe('validateArgs :Head', () => {
+describe('validateFiles :Head', () => {
   it('should throw error if args length is 0', () => {
-    assert.throws(() => validateArgs([], 'error'),
-      { message: 'error' });
+    const message = 'usage: head [-n lines | -c bytes] [file ...]';
+    assert.throws(() => validateFiles([]), { message });
   });
   it('should not throw error if args length is greater than 0', () => {
-    assert.strictEqual(validateArgs(['hello']), undefined);
+    assert.strictEqual(validateFiles(['hello']), undefined);
+  });
+});
+
+describe('isOption', () => {
+  it('should return true if given a option.', () => {
+    assert.strictEqual(isOption('-n'), true);
+  });
+  it('should return false if something not starting with - is given', () => {
+    assert.strictEqual(isOption('n'), false);
+  });
+});
+
+describe('validateCombinations', () => {
+  it('should throw error if different options are combined', () => {
+    assert.throws(() => validateCombinations(['-n', '1', '-c', '2']),
+      {
+        message: 'head: can\'t combine line and byte counts'
+      });
+  });
+  it('should not throw error if same option is given twice', () => {
+    assert.strictEqual(validateCombinations(['-n', '1', '-n', '2']), undefined);
+  });
+});
+
+describe('isOptionValid', () => {
+  it('should return name if option is valid', () => {
+    assert.strictEqual(isOptionValid('-n', {
+      '-n': 'line', '-c': 'byte'
+    }), 'line');
+  });
+  it('should return false if same options are given', () => {
+    assert.strictEqual(isOptionValid('-a', {
+      '-n': 'line', '-c': 'byte'
+    }), false);
   });
 });

@@ -33,8 +33,9 @@ describe('headMain', () => {
       content: 'hello'
     }], 'utf8');
     const mockedConsole = mockConsole(['hello']);
+    const mockedError = mockConsole(['error']);
     assert.strictEqual(headMain(mockReadFileSync,
-      { log: mockedConsole, error: mockedConsole },
+      { log: mockedConsole, error: mockedError },
       ['-n', '1', 'content.txt']), 0);
   });
 
@@ -45,8 +46,9 @@ describe('headMain', () => {
 
     const mockedConsole = mockConsole(['==> content.txt <==\nhello\n',
       '==> a.txt <==\nbye\n']);
+    const mockedError = mockConsole(['error']);
     assert.strictEqual(headMain(mockReadFileSync,
-      { log: mockedConsole, error: mockedConsole },
+      { log: mockedConsole, error: mockedError },
       ['content.txt', 'a.txt']), 0);
   });
 
@@ -57,34 +59,39 @@ describe('headMain', () => {
     { name: 'b.txt', content: 'hey' }], 'utf8');
     const mockedConsole = mockConsole(['==> content.txt <==\nhello\n',
       '==> a.txt <==\nbye\n', '==> b.txt <==\nhey\n']);
+    const mockedError = mockConsole(['error']);
     assert.strictEqual(headMain(mockReadFileSync,
-      { log: mockedConsole, error: mockedConsole },
+      { log: mockedConsole, error: mockedError },
       ['content.txt', 'a.txt', 'b.txt']), 0);
   });
   it('should give error if file is invalid', () => {
     const mockReadFileSync = readFile([], 'utf8');
     const mockedConsole = mockConsole(
+      ['hello']);
+    const mockedError = mockConsole(
       ['head: content.txt: No such file or directory']);
     assert.strictEqual(headMain(mockReadFileSync,
-      { log: mockedConsole, error: mockedConsole }, ['content.txt']), 1);
+      { log: mockedConsole, error: mockedError }, ['content.txt']), 1);
   });
 });
 
 describe('print', () => {
   it('should print the output', () => {
     const mockedConsole = mockConsole(['hello']);
+    const mockedError = mockConsole(['error']);
     assert.strictEqual(print({ content: 'hello' }, {
-      log: mockedConsole, error: mockedConsole
+      log: mockedConsole, error: mockedError
     }, mockFormatter), undefined);
     assert.strictEqual(mockedConsole.count, 1);
   });
 
   it('should print the error', () => {
-    const mockedConsole = mockConsole(['Can not read file']);
+    const mockedConsole = mockConsole(['hello']);
+    const mockedError = mockConsole(['Can not read file']);
     assert.strictEqual(print({ error: 'Can not read file' }, {
-      log: mockedConsole, error: mockedConsole
+      log: mockedConsole, error: mockedError
     }, mockFormatter), undefined);
-    assert.strictEqual(mockedConsole.count, 1);
+    assert.strictEqual(mockedError.count, 1);
   });
 });
 
