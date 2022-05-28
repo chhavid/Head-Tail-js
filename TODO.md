@@ -41,7 +41,6 @@
 # HEAD
 
 - **TODO:**
-  - [ ] Fix isOption.
   - [ ] Take decision of byte or lines only once.
   - [ ] Put only readfile in try catch.
 
@@ -49,6 +48,7 @@
 
 - **DONE:**
 
+  - [x] Fix isOption.
   - [x] Passing args in main. 
   - [x] Refactor validateOptions. 
   - [x] Refactor parseArgs. 

@@ -35,7 +35,7 @@ const validateOptions = function (options, currentOption) {
   options.limit = +options.limit;
 };
 
-const isOption = (arg) => /^-/.test(arg);
+const isOption = (arg) => ('' + arg).startsWith('-') && arg.length > 1;
 
 exports.validateOptions = validateOptions;
 exports.validateLimit = validateLimit;
