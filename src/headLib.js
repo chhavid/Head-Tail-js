@@ -11,8 +11,9 @@ const firstNLines = (content, count) => {
 
 const firstNBytes = (content, limit) => sliceUpto(content, limit);
 
-const head = (content, { name, limit }) =>
-  name === 'byte' ? firstNBytes(content, limit) : firstNLines(content, limit);
+const head = (content, { limit }, headFn) => {
+  return headFn(content, limit);
+};
 
 exports.firstNLines = firstNLines;
 exports.firstNBytes = firstNBytes;

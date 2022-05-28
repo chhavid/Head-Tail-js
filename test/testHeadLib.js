@@ -41,35 +41,35 @@ describe('sliceUpto', () => {
 
 describe('head', () => {
   it('should give the content of single line', () => {
-    assert.strictEqual(head('hello', { name: 'line', limit: 1 }), 'hello');
-    assert.strictEqual(head('bye', { name: 'line', limit: 1 }), 'bye');
+    assert.strictEqual(head('hello', { limit: 1 }, firstNLines), 'hello');
+    assert.strictEqual(head('bye', { limit: 1 }, firstNLines), 'bye');
   });
 
   it('should give the content with 2 lines', () => {
     assert.strictEqual(head('hello\nworld',
-      { name: 'line', limit: 2 }), 'hello\nworld');
+      { limit: 2 }, firstNLines), 'hello\nworld');
     assert.strictEqual(head('good\nbye',
-      { name: 'line', limit: 2 }), 'good\nbye');
+      { limit: 2 }, firstNLines), 'good\nbye');
   });
   it('should give the content upto 10 lines', () => {
-    assert.strictEqual(head('how\nare\nyou\n?', { name: 'line', limit: 4 }),
+    assert.strictEqual(head('how\nare\nyou\n?', { limit: 4 }, firstNLines),
       'how\nare\nyou\n?');
   });
   it('should give only first 10 lines for content more than 10 lines',
     () => {
       assert.strictEqual(head('a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl',
-        { name: 'line', limit: 10 }), 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj');
+        { limit: 10 }, firstNLines), 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj');
     });
   it('should give lines upto specified number', () => {
-    assert.strictEqual(head('aa\nb\nhello', { name: 'line', limit: 2 }),
+    assert.strictEqual(head('aa\nb\nhello', { limit: 2 }, firstNLines),
       'aa\nb');
-    assert.strictEqual(head('aa\nb\nhello', { name: 'line', limit: 1 }),
+    assert.strictEqual(head('aa\nb\nhello', { limit: 1 }, firstNLines),
       'aa');
   });
   it('should give lines upto specified bytes', () => {
-    assert.strictEqual(head('aaa\nb\nhello', { name: 'byte', limit: 2 }),
+    assert.strictEqual(head('aaa\nb\nhello', { limit: 2 }, firstNBytes),
       'aa');
-    assert.strictEqual(head('aa\nb\nhello', { name: 'byte', limit: 6 }),
+    assert.strictEqual(head('aa\nb\nhello', { limit: 6 }, firstNBytes),
       'aa\nb\nh');
   });
 });

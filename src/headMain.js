@@ -1,14 +1,17 @@
 const { parseArgs } = require('./parse.js');
-const { head } = require('./headLib.js');
+const { head, firstNBytes, firstNLines } = require('./headLib.js');
 const { getFormater } = require('./utilityFns');
 
-const headOfFile = (file, readFile, options) => {
+const headOfFile = (file, readFile, options, headFn) => {
   const result = { file };
+  let content;
   try {
-    result.content = head(readFile(file, 'utf8'), options);
+    content = readFile(file, 'utf8');
   } catch (err) {
     result.error = 'head: ' + file + ': No such file or directory';
+    return result;
   }
+  result.content = head(content, options, headFn);
   return result;
 };
 
@@ -25,7 +28,9 @@ const exitCode = (results) => results.find((res) => res.error) ? 1 : 0;
 const headMain = (readFile, loggers, args) => {
   const { files, options } = parseArgs(args);
   const formater = getFormater(files);
-  const headResults = files.map(file => headOfFile(file, readFile, options));
+  const headFn = options.name === 'byte' ? firstNBytes : firstNLines;
+  const headResults = files.map(file =>
+    headOfFile(file, readFile, options, headFn));
   headResults.forEach((result) => print(result, loggers, formater));
   return exitCode(headResults);
 };

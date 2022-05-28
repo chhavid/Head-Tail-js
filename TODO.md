@@ -41,13 +41,13 @@
 # HEAD
 
 - **TODO:**
-  - [ ] Take decision of byte or lines only once.
-  - [ ] Put only readfile in try catch.
 
 - **Consider:**
 
 - **DONE:**
 
+  - [x] Take decision of byte or lines only once.
+  - [x] Put only readfile in try catch.
   - [x] Fix isOption.
   - [x] Passing args in main. 
   - [x] Refactor validateOptions. 

@@ -1,4 +1,5 @@
 const assert = require('assert');
+const { firstNLines } = require('../src/headLib.js');
 const { headMain, print, headAFile } =
   require('../src/headMain.js');
 
@@ -103,13 +104,13 @@ describe('headAFile', () => {
     }], 'utf8');
     assert.deepStrictEqual(headAFile('a.txt', mockReadFileSync, {
       name: 'lines', limit: 1
-    }), { content: 'hello', file: 'a.txt' });
+    }, firstNLines), { content: 'hello', file: 'a.txt' });
   });
   it('should have error in result if file not valid', () => {
     const mockReadFileSync = readFile([{}], 'utf8');
     assert.deepStrictEqual(headAFile('a.txt', mockReadFileSync, {
       name: 'lines', limit: 1
-    }), {
+    }, firstNLines), {
       error: 'head: a.txt: No such file or directory',
       file: 'a.txt'
     });
