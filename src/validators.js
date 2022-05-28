@@ -1,6 +1,8 @@
+const usage = () => 'usage: head [-n lines | -c bytes] [file ...]';
+
 const validateFiles = (args) => {
   if (args.length === 0) {
-    const message = 'usage: head [-n lines | -c bytes] [file ...]';
+    const message = usage();
     throw { message };
   }
 };
@@ -26,7 +28,7 @@ const validateOptions = function (options, currentOption) {
   if (!isOptionValid(currentOption, flagNames)) {
     throw {
       message: `head: invalid option -- ${currentOption.slice(1)}\n` +
-        'usage: head [-n lines | -c bytes] [file ...]'
+        usage()
     };
   }
   validateLimit(options);

@@ -1,16 +1,20 @@
 const { validateOptions, isOption, validateFiles, validateCombinations } =
   require('./validators.js');
 
-const formatArgs = function (arg) {
-  if (arg.startsWith('-') && isFinite(arg[1])) {
+const isNumericOption = opt => isOption(opt) && isFinite(opt.slice(1));
+
+const separateOption = option => [option.slice(0, 2), option.slice(2)];
+
+const standardizeArgs = function (arg) {
+  if (isNumericOption(arg)) {
     return ['-n', arg.slice(1)];
   }
-  return arg.startsWith('-') ? [arg.slice(0, 2), arg.slice(2)] : arg;
+  return isOption(arg) ? separateOption(arg) : arg;
 };
 
 const splitArgs = (args) => {
-  const formattedArgs = args.flatMap(formatArgs);
-  return formattedArgs.filter(arg => arg.length > 0);
+  const formattedArgs = args.flatMap(standardizeArgs);
+  return formattedArgs.filter(arg => arg);
 };
 
 const parse = function (args, flagNames) {
@@ -37,4 +41,4 @@ const parseArgs = function (parameters) {
 
 exports.parse = parse;
 exports.parseArgs = parseArgs;
-exports.formatArgs = formatArgs;
+exports.standardizeArgs = standardizeArgs;

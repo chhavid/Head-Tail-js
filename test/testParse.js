@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { parseArgs, formatArgs } = require('../src/parse.js');
+const { parseArgs, standardizeArgs } = require('../src/parse.js');
 
 describe('parseArgs', () => {
   it('should parse only filename.', () => {
@@ -87,14 +87,14 @@ describe('parseArgs', () => {
   });
 });
 
-describe('formatArgs', () => {
+describe('standardizeArgs', () => {
   it('should give option without value', () => {
-    assert.deepStrictEqual(formatArgs('-n'), ['-n', '']);
+    assert.deepStrictEqual(standardizeArgs('-n'), ['-n', '']);
   });
   it('should give option with value', () => {
-    assert.deepStrictEqual(formatArgs('-n2'), ['-n', '2']);
+    assert.deepStrictEqual(standardizeArgs('-n2'), ['-n', '2']);
   });
   it('should give direct value', () => {
-    assert.deepStrictEqual(formatArgs('-4'), ['-n', '4']);
+    assert.deepStrictEqual(standardizeArgs('-4'), ['-n', '4']);
   });
 });
