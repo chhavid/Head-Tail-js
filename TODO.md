@@ -41,13 +41,17 @@
 # HEAD
 
 - **TODO:**
-
-- [ ] Refactor validateOptions. 
+  - [ ] Fix isOption.
+  - [ ] Take decision of byte or lines only once.
+  - [ ] Put only readfile in try catch.
 
 - **Consider:**
 
 - **DONE:**
 
+  - [x] Passing args in main. 
+  - [x] Refactor validateOptions. 
+  - [x] Refactor parseArgs. 
   - [x] Make mock for console of log and error.
   - [x] Should give console error if `file is invalid`.
   - [x] Modify and throw error messages.

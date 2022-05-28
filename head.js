@@ -2,8 +2,7 @@ const fs = require('fs');
 
 const { headMain } = require('./src/headMain.js');
 
-const main = () => {
-  const args = process.argv.slice(2);
+const main = (args) => {
   const { log, error } = console;
   try {
     process.exitCode = headMain(fs.readFileSync, { log, error }, args);
@@ -13,4 +12,4 @@ const main = () => {
   }
 };
 
-main();
+main(process.argv.slice(2));

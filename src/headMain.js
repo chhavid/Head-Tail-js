@@ -2,7 +2,7 @@ const { parseArgs } = require('./parse.js');
 const { head } = require('./headLib.js');
 const { getFormater } = require('./utilityFns');
 
-const headAFile = (file, readFile, options) => {
+const headOfFile = (file, readFile, options) => {
   const result = { file };
   try {
     result.content = head(readFile(file, 'utf8'), options);
@@ -25,12 +25,12 @@ const exitCode = (results) => results.find((res) => res.error) ? 1 : 0;
 const headMain = (readFile, loggers, args) => {
   const { files, options } = parseArgs(args);
   const formater = getFormater(files);
-  const headResults = files.map(file => headAFile(file, readFile, options));
+  const headResults = files.map(file => headOfFile(file, readFile, options));
   headResults.forEach((result) => print(result, loggers, formater));
   return exitCode(headResults);
 };
 
 exports.headMain = headMain;
-exports.headAFile = headAFile;
+exports.headAFile = headOfFile;
 exports.print = print;
 exports.exitCode = exitCode;
