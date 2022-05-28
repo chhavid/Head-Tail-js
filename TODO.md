@@ -7,6 +7,7 @@
   - [ ] Add validations for tail.
   - [ ] Add -q option in tail.
   - [ ] Add -r option in tail.
+  - [ ] Implement -q and -r functionality in tail.
 
   <br/>
   
@@ -18,6 +19,7 @@
 
 - **DONE:**
 
+  - [x] Added -q and -r in parse.
   - [x] Modify slice function for tail.
   - [x] `+num` is also a valid option argument in tail.
   - [x] `-n +num` is also a valid option argument in tail.
