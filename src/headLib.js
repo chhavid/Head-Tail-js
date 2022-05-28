@@ -3,15 +3,18 @@ const startIndex = 0;
 
 const sliceUpto = (content, count) => content.slice(startIndex, count);
 
-const getLines = function (content, count) {
+const firstNLines = (content, count) => {
   const lines = splitContent(content);
   const headLines = sliceUpto(lines, count);
   return joinLines(headLines);
 };
 
-const head = (content, { name, limit }) =>
-  name === 'byte' ? sliceUpto(content, limit) : getLines(content, limit);
+const firstNBytes = (content, limit) => sliceUpto(content, limit);
 
-exports.getLines = getLines;
+const head = (content, { name, limit }) =>
+  name === 'byte' ? firstNBytes(content, limit) : firstNLines(content, limit);
+
+exports.firstNLines = firstNLines;
+exports.firstNBytes = firstNBytes;
 exports.sliceUpto = sliceUpto;
 exports.head = head;

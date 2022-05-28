@@ -22,7 +22,7 @@ const print = (headContent, loggers, formater) => {
 
 const exitCode = (results) => results.find((res) => res.error) ? 1 : 0;
 
-const headMain = function (readFile, loggers, args) {
+const headMain = (readFile, loggers, args) => {
   const { files, options } = parseArgs(args);
   const formater = getFormater(files);
   const headResults = files.map(file => headAFile(file, readFile, options));

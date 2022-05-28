@@ -5,7 +5,7 @@ const isNumericOption = opt => isOption(opt) && isFinite(opt.slice(1));
 
 const separateOption = option => [option.slice(0, 2), option.slice(2)];
 
-const standardizeArgs = function (arg) {
+const standardizeArgs = (arg) => {
   if (isNumericOption(arg)) {
     return ['-n', arg.slice(1)];
   }
@@ -17,7 +17,7 @@ const splitArgs = (args) => {
   return formattedArgs.filter(arg => arg);
 };
 
-const parse = function (args, flagNames) {
+const parse = (args, flagNames) => {
   const options = { name: 'line', limit: 10 };
   let index = 0;
   while (isOption(args[index])) {
@@ -31,7 +31,7 @@ const parse = function (args, flagNames) {
   return { files, options };
 };
 
-const parseArgs = function (parameters) {
+const parseArgs = (parameters) => {
   const flagNames = { '-n': 'line', '-c': 'byte' };
   const args = splitArgs(parameters);
 

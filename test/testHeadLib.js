@@ -1,12 +1,25 @@
 const assert = require('assert');
-const { getLines, sliceUpto, head } = require('../src/headLib.js');
+const { firstNLines, firstNBytes, sliceUpto, head } =
+  require('../src/headLib.js');
 
-describe('getLines', () => {
+describe('firstNLines', () => {
   it('should get single line.', () => {
-    return assert.strictEqual(getLines('a', 1), 'a');
+    return assert.strictEqual(firstNLines('a', 1), 'a');
   });
   it('should get 2 lines.', () => {
-    return assert.strictEqual(getLines('a\nb\nc', 2), 'a\nb');
+    return assert.strictEqual(firstNLines('a\nb\nc', 2), 'a\nb');
+  });
+});
+
+describe('firstNBytes', () => {
+  it('should get single byte.', () => {
+    return assert.strictEqual(firstNBytes('ab', 1), 'a');
+  });
+  it('should get 2 bytes.', () => {
+    return assert.strictEqual(firstNBytes('ab', 2), 'ab');
+  });
+  it('should also consider newline character', () => {
+    return assert.strictEqual(firstNBytes('a\nbc', 3), 'a\nb');
   });
 });
 
