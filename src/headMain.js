@@ -25,12 +25,13 @@ const print = (headContent, loggers, formater) => {
 
 const exitCode = (results) => results.find((res) => res.error) ? 1 : 0;
 
+const headFn = ({ name }) => name === 'byte' ? firstNBytes : firstNLines;
+
 const headMain = (readFile, loggers, args) => {
   const { files, options } = parseArgs(args);
   const formater = getFormater(files);
-  const headFn = options.name === 'byte' ? firstNBytes : firstNLines;
   const headResults = files.map(file =>
-    headOfFile(file, readFile, options, headFn));
+    headOfFile(file, readFile, options, headFn(options)));
   headResults.forEach((result) => print(result, loggers, formater));
   return exitCode(headResults);
 };
